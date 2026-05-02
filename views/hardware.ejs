@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">TechRM</div>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/hardware">Hardware</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+        <a href="#presupuesto" class="btn-primary">Presupuesto Gratis</a>
+    </header>
+
+    <section class="hero hero-clean">
+        <a href="#servicios" class="center-cta">Solicitar Servicio</a>
+
+        <div class="hero-half hero-hw">
+            <div class="hero-content">
+                <h1 class="hw-title">Hardware y ordenadores<br>con soporte integral.</h1>
+                <p>Ofrecemos un servicio completo que cubre montaje, reparación, limpieza/mantenimiento y asesoramiento personalizado.</p>
+            </div>
+        </div>
+
+        <div class="hero-half hero-sw">
+            <div class="hero-content">
+                <h1 class="sw-title">Soluciones a medida<br>para tu infraestructura.</h1>
+                <p>Desde PCs de sobremesa y portátiles hasta equipos multimedia, entregamos soluciones listas para usar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="services">
+        <h2 class="section-title">Nuestros servicios de hardware</h2>
+        <div class="grid">
+            <div class="services-grid">
+                <div class="card hw">
+                    <h3>Montaje de equipos</h3>
+                    <p>Montaje profesional de ordenadores de sobremesa, portátiles y equipos multimedia con componentes seleccionados.</p>
+                    <ul>
+                        <li>Configuración personalizada</li>
+                        <li>Testeo de rendimiento</li>
+                        <li>Puesta en marcha optimizada</li>
+                    </ul>
+                </div>
+                <div class="card hw">
+                    <h3>Reparación de equipos</h3>
+                    <p>Diagnóstico rápido y reparación fiable para ordenadores, portátiles y sistemas Home TV.</p>
+                    <ul>
+                        <li>Recuperación ante fallos</li>
+                        <li>Sustitución de piezas</li>
+                        <li>Reparaciones urgentes</li>
+                    </ul>
+                </div>
+                <div class="card hw">
+                    <h3>Limpieza y mantenimiento</h3>
+                    <p>Mantenimiento preventivo que reduce el desgaste, mejora el rendimiento y prolonga la vida útil de tus equipos.</p>
+                    <ul>
+                        <li>Limpieza interna y externas</li>
+                        <li>Optimización de refrigeración</li>
+                        <li>Plan de mantenimiento periódico</li>
+                    </ul>
+                </div>
+                <div class="card hw">
+                    <h3>Asesoramiento personalizado</h3>
+                    <p>Orientación especializada para elegir el equipo ideal según uso, presupuesto y necesidades tecnológicas.</p>
+                    <ul>
+                        <li>Recomendación de hardware</li>
+                        <li>Plan de actualización</li>
+                        <li>Asistencia técnica continua</li>
+                    </ul>
+                </div>
+                <div class="card hw">
+                    <h3>Venta de Home TV</h3>
+                    <p>Televisores inteligentes con imagen superior, conectividad moderna y instalación dedicada.</p>
+                    <ul>
+                        <li>Equipos de calidad garantizada</li>
+                        <li>Configuración y puesta en marcha</li>
+                        <li>Soporte post-venta</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="card hw form-card">
+                    <h3>Solicita tu servicio</h3>
+                    <% if (typeof success !== 'undefined' && success) { %>
+                    <div class="success-message">
+                        ¡Gracias! Tu solicitud ha sido enviada. Nos pondremos en contacto contigo pronto.
+                    </div>
+                    <% } %>
+                    <form action="/solicitar-servicio" method="POST" class="service-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono">
+                        </div>
+                        <div class="form-group">
+                            <label for="servicio">Servicio deseado</label>
+                            <select id="servicio" name="servicio" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="montaje">Montaje de equipos</option>
+                                <option value="reparacion">Reparación de equipos</option>
+                                <option value="limpieza">Limpieza y mantenimiento</option>
+                                <option value="asesoramiento">Asesoramiento personalizado</option>
+                                <option value="home-tv">Venta de Home TV</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Detalles adicionales</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe tu necesidad o equipo..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar solicitud</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h4>4 servicios</h4>
+                <p>hardware completos</p>
+            </div>
+            <div class="stat-box">
+                <h4>PC / Portátil</h4>
+                <p>soporte total</p>
+            </div>
+            <div class="stat-box">
+                <h4>Home TV</h4>
+                <p>venta e instalación</p>
+            </div>
+            <div class="stat-box">
+                <h4>Asesoría</h4>
+                <p>experta</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 TechRM. Hardware confiable para empresas exigentes.</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

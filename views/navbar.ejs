@@ -1,0 +1,17 @@
+<nav>
+    <div class="logo">TechRM</div>
+    <div class="nav-links">
+        <a href="/" class="<%= currentPage === 'index' ? 'active' : '' %>">SERVICIOS</a>
+        <a href="/hardware" class="<%= currentPage === 'hardware' ? 'active' : '' %>">HARDWARE</a>
+        <a href="/software" class="<%= currentPage === 'software' ? 'active' : '' %>">SOFTWARE</a>
+        <a href="/nosotros" class="<%= currentPage === 'nosotros' ? 'active' : '' %>">NOSOTROS</a>
+    </div>
+    <button class="btn-toggle" id="theme-toggle" title="Cambiar tema">🌙</button>
+</nav>
+
+<script>
+document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('light-mode');
+    this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+});
+</script>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechRM - Sobre Nosotros</title>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #15161d;
+            --card-inner: #1c1d26;
+            --card-border: #262835;
+            --text-main: #ffffff;
+            --text-muted: #8b8e9f;
+            --accent-blue: #93c5fd;
+            --accent-purple: #d8b4fe;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .light-mode {
+            --bg-color: #ffffff;
+            --card-bg: #f8f9fa;
+            --card-inner: #e9ecef;
+            --card-border: #dee2e6;
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --accent-blue: #007bff;
+            --accent-purple: #6f42c1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background-color: rgba(11, 12, 16, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 5px;
+        }
+
+        .btn-toggle {
+            background-color: transparent;
+            color: var(--text-main);
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-toggle:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            margin-top: 0;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(11, 12, 16, 0.8), rgba(11, 12, 16, 0.9)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1920') center/cover;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #93c5fd, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 85%;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Sections General */
+        section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #60a5fa;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        /* About Content */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800') center/cover;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #93c5fd, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mv-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .mv-card svg {
+            width: 48px;
+            height: 48px;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .team-card svg {
+            width: 64px;
+            height: 64px;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background-color: var(--bg-color);
+        }
+
+        .footer-left strong {
+            color: white;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social svg {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer-social svg:hover {
+            color: white;
+        }
+
+        /* Light Mode Overrides */
+        .light-mode nav {
+            background-color: rgba(248, 249, 250, 0.95);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .light-mode .nav-links a.active {
+            border-bottom: 2px solid #007bff;
+        }
+
+        .light-mode .btn-toggle {
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .light-mode .btn-toggle:hover {
+            background-color: rgba(0,0,0,0.1);
+            border-color: rgba(0,0,0,0.4);
+        }
+
+        .light-mode .bottom-section {
+            background-color: #f8f9fa;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .light-mode footer {
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background-color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid, .team-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            footer { flex-direction: column; gap: 2rem; text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            section, .bottom-section { padding: 4rem 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('navbar') %>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SOBRE NOSOTROS</h1>
+            <p>TechRM es una empresa líder en soluciones integrales de hardware y software, dedicada a proporcionar precisión técnica y excelencia en cada proyecto.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="about-grid">
+            <div class="about-text">
+                <div class="section-subtitle">NUESTRA HISTORIA</div>
+                <h2>Ingeniería con Precisión</h2>
+                <p>Fundada con la visión de fusionar la robustez del hardware con la innovación del software, TechRM se ha convertido en un socio confiable para empresas que buscan soluciones tecnológicas de alto rendimiento.</p>
+                <p>Nuestro equipo de expertos combina años de experiencia en ingeniería de sistemas, desarrollo de software personalizado y consultoría técnica para ofrecer resultados que superan las expectativas.</p>
+                
+                <div class="mission-vision">
+                    <div class="mv-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <h4>Misión</h4>
+                        <p>Proporcionar soluciones tecnológicas integrales que impulsen el éxito de nuestros clientes.</p>
+                    </div>
+                    <div class="mv-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <h4>Visión</h4>
+                        <p>Ser líderes en innovación tecnológica, marcando el estándar en precisión y excelencia.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value">Precisión</div>
+                <div class="stat-label">EN CADA SOLUCIÓN</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">Innovación</div>
+                <div class="stat-label">TECNOLÓGICA CONSTANTE</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">Compromiso</div>
+                <div class="stat-label">CON NUESTROS CLIENTES</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">SOPORTE TÉCNICO</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <div class="section-subtitle">NUESTRO EQUIPO</div>
+            <h2 class="section-title">Expertos en Tecnología</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                    <rect x="9" y="9" width="6" height="6"/>
+                    <line x1="9" y1="1" x2="9" y2="4"/>
+                    <line x1="15" y1="1" x2="15" y2="4"/>
+                    <line x1="9" y1="20" x2="9" y2="23"/>
+                    <line x1="15" y1="20" x2="15" y2="23"/>
+                    <line x1="20" y1="9" x2="23" y2="9"/>
+                    <line x1="20" y1="14" x2="23" y2="14"/>
+                    <line x1="1" y1="9" x2="4" y2="9"/>
+                    <line x1="1" y1="14" x2="4" y2="14"/>
+                </svg>
+                <h3>Ingenieros de Hardware</h3>
+                <p>Especialistas en montaje, reparación y optimización de sistemas informáticos de alto rendimiento.</p>
+            </div>
+            <div class="team-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="4 17 10 11 4 5"/>
+                    <line x1="12" y1="19" x2="20" y2="19"/>
+                </svg>
+                <h3>Desarrolladores de Software</h3>
+                <p>Creadores de soluciones digitales personalizadas, desde CRM hasta sistemas de punto de venta.</p>
+            </div>
+            <div class="team-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <h3>Consultores Técnicos</h3>
+                <p>Asesores estratégicos que guían a las empresas en su transformación digital.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-left">
+            <strong>TechRM</strong>
+            <span>© 2026 TECHRM. PRECISIÓN EN INGENIERÍA.</span>
+        </div>
+        <div class="footer-links">
+            <a href="#">POLÍTICA DE PRIVACIDAD</a>
+            <a href="#">TÉRMINOS DE SERVICIO</a>
+            <a href="#">ESPECIFICACIONES</a>
+            <a href="#">API DOCS</a>
+        </div>
+        <div class="footer-social">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><path d="M2 4l10 8 10-8"></path></svg>
+        </div>
+    </footer>
+
+</body>
+</html>

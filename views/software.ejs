@@ -206,7 +206,13 @@
             color: white;
             font-family: inherit;
         }
+        .form-group select{
+            color: rgb(80, 79, 79);
+            
+        }
 
+
+       
         .btn-submit-full {
             width: 100%;
             background: var(--accent-purple);
@@ -270,8 +276,8 @@
         <h1>Innovación en <span>Software</span></h1>
         <p>Desarrollamos soluciones digitales a medida que transforman la complejidad técnica en una ventaja competitiva para su negocio. Ingeniería de software con precisión táctil.</p>
         <div class="hero-buttons">
-            <button class="btn-primary">CONSULTAR PROYECTO</button>
-            <button class="btn-secondary">VER CATÁLOGO</button>
+            <button class="btn-primary" onclick="document.querySelector('.contact-box').scrollIntoView({ behavior: 'smooth' })">CONSULTAR PROYECTO</button>
+            <button class="btn-secondary" onclick="document.querySelector('.section-container').scrollIntoView({ behavior: 'smooth' })">VER CATÁLOGO</button>
         </div>
     </header>
 
@@ -343,14 +349,25 @@
                 <form>
                     <div class="form-group">
                         <label>MI NOMBRE</label>
-                        <input type="text" placeholder="Ej: Juan Pérez">
+                        <input type="text" placeholder="Juan Pérez">
+                    </div>
+                    <div class="form-group" style="display: flex; gap: 1rem; margin-bottom: 2rem;  ">
+                        <div style="flex: 1; margin-right: 1rem;">
+                            <label>MI TELÉFONO</label>
+                            <input type="text" placeholder="+34 600 123 456">
+                        </div>
+                        <div style="flex: 1; margin-left: 1rem;">
+                            <label>MI CORREO</label>
+                            <input type="email" placeholder="juan.perez@email.com">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>¿QUÉ NECESITA?</label>
                         <select>
-                            <option>Necesito un programa para mi negocio</option>
-                            <option>Necesito una página web</option>
-                            <option>Necesito soporte técnico</option>
+                            <option value="">Seleccione una opción</option>
+                            <option value="programa">Necesito un programa para mi negocio</option>
+                            <option value="pagina">Necesito una página web</option>
+                            <option value="soporte">Necesito soporte técnico</option>
                         </select>
                     </div>
                     <div class="form-group">

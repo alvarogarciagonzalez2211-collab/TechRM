@@ -1,3 +1,92 @@
+<style>
+    /* Navbar CSS Variables */
+    :root {
+        --bg-color: #0b0c10;
+        --text-main: #ffffff;
+        --text-muted: #8b8e9f;
+        --nav-bg: rgba(11, 12, 16, 0.95);
+        --nav-border: rgba(255,255,255,0.05);
+    }
+
+    .light-mode {
+        --bg-color: #ffffff;
+        --text-main: #212529;
+        --text-muted: #6c757d;
+        --nav-bg: rgba(248, 249, 250, 0.95);
+        --nav-border: rgba(0,0,0,0.05);
+    }
+
+    /* Navbar Styles */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 4rem;
+        border-bottom: 1px solid var(--nav-border);
+        background-color: var(--nav-bg);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: var(--text-main);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: var(--text-main);
+    }
+
+    .nav-links a.active {
+        color: var(--text-main);
+        border-bottom: 2px solid #3b82f6;
+        padding-bottom: 5px;
+    }
+
+    .light-mode .nav-links a.active {
+        border-bottom-color: #007bff;
+    }
+
+    .btn-toggle {
+        background: transparent;
+        color: var(--text-main);
+        padding: 0.6rem 1rem;
+        border-radius: 20px;
+        font-size: 1rem;
+        border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-toggle:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: rgba(255,255,255,0.4);
+    }
+
+    .light-mode .btn-toggle {
+        border-color: rgba(0,0,0,0.2);
+    }
+</style>
+
 <nav>
     <div class="logo">TechRM</div>
     <div class="nav-links">
@@ -10,8 +99,21 @@
 </nav>
 
 <script>
-document.getElementById('theme-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('light-mode');
-    this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+        });
+    }
+    
+    // Aplicar tema guardado
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        if (themeToggle) themeToggle.textContent = '☀️';
+    }
 });
 </script>

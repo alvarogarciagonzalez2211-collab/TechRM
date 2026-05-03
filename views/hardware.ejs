@@ -13,6 +13,8 @@
             --text-muted: #8b8e9f;
             --border-color: rgba(255, 255, 255, 0.1);
             --form-input: #1c1e26;
+            --nav-bg: rgba(11, 12, 16, 0.95);
+            --nav-border: rgba(255,255,255,0.05);
         }
 
         body {
@@ -22,45 +24,6 @@
             margin: 0;
             line-height: 1.6;
             min-height: 100vh;
-        }
-
-        /* Navbar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 6%;
-            background: rgba(11, 12, 18, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { 
-            color: var(--text-muted); 
-            text-decoration: none; 
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            text-transform: uppercase;
-        }
-        .nav-links a.active { color: var(--accent-blue); border-bottom: 2px solid var(--accent-blue); padding-bottom: 4px; }
-        .btn-toggle {
-            background: transparent;
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 1rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-toggle:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.4);
         }
 
         /* Hero Header */
@@ -272,10 +235,12 @@
             --text-muted: #6c757d;
             --border-color: rgba(0, 0, 0, 0.1);
             --form-input: #e9ecef;
+            --nav-bg: rgba(248, 249, 250, 0.95);
+            --nav-border: rgba(0,0,0,0.05);
         }
 
         .light-mode nav {
-            background: rgba(248, 249, 250, 0.8);
+            background: var(--nav-bg);
         }
 
         .light-mode .nav-links a.active {

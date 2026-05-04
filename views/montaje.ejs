@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montaje a Medida | TechRM</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Asegúrate de que la ruta sea correcta -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Reutilizamos tus variables corregidas */
+        :root {
+            --bg-color: #0b0c10;
+            --bg-alt: #111218;
+            --card-bg: #15161d;
+            --card-inner: #1c1d26;
+            --card-inner-hover: #232530;
+            --card-border: #262835;
+            --text-main: #ffffff;
+            --text-muted: #8b8e9f;
+            --accent-blue: #93c5fd;
+            --accent-purple: #d8b4fe;
+            --nav-bg: rgba(11, 12, 16, 0.2);
+            --nav-border: rgba(255, 255, 255, 0.05);
+        }
+
+        .light-mode {
+            --bg-color: #ffffff;
+            --bg-alt: #f8f9fa;
+            --card-bg: #f3f4f6;
+            --card-inner: #ffffff;
+            --card-inner-hover: #e5e7eb;
+            --card-border: rgba(0, 0, 0, 0.1);
+            --text-main: #111827;
+            --text-muted: #1f2937;
+            --accent-blue: #1d4ed8;
+            --accent-purple: #6d28d9;
+            --nav-bg: rgba(255, 255, 255, 0.2);
+            --nav-border: rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Nav Transparente (Efecto Glassmorphism) */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--nav-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4rem;
+            box-sizing: border-box;
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; }
+
+        /* Estilos del Formulario */
+        .setup-view {
+            padding: 140px 4rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-subtitle { 
+            color: var(--accent-blue); 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            letter-spacing: 1.5px; 
+            font-size: 0.8rem;
+        }
+        .section-title { font-size: 3rem; margin: 0.5rem 0; }
+        .setup-description { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        .setup-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 3rem;
+        }
+
+        .setup-form {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group { margin-bottom: 2rem; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 0.8rem; 
+            font-weight: 600; 
+            font-size: 0.9rem;
+        }
+
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 2rem; 
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--card-inner);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        /* Selector de Tipo Estilizado */
+        .type-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .type-selector input { display: none; }
+        .type-card {
+            background: var(--card-inner);
+            border: 2px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .type-selector input:checked + .type-card {
+            border-color: var(--accent-blue);
+            background: rgba(147, 197, 253, 0.05);
+        }
+
+        /* Botón Premium */
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent-blue);
+            color: #1e3a8a;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-submit:hover { transform: translateY(-3px); }
+
+        /* Columna de Info */
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 16px;
+            height: fit-content;
+            position: sticky;
+            top: 140px;
+        }
+
+        .info-card h4 { color: var(--accent-blue); margin-bottom: 1.5rem; }
+        .info-card ul { list-style: none; padding: 0; }
+        .info-card li { 
+            display: flex; 
+            gap: 1rem; 
+            margin-bottom: 1.5rem; 
+            font-size: 0.9rem; 
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        .info-card .step {
+            background: var(--accent-blue);
+            color: #1e3a8a;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 800;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 900px) {
+            .setup-container { grid-template-columns: 1fr; }
+            .nav { padding: 1rem 2rem; }
+            .setup-view { padding: 120px 2rem; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">TechRM</div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="/">Inicio</a>
+            <button id="theme-toggle" style="background: none; border: 1px solid var(--card-border); color: var(--text-main); padding: 5px 10px; cursor: pointer; border-radius: 5px;">
+                🌓
+            </button>
+        </div>
+    </nav>
+
+    <main class="setup-view">
+        <div class="section-header">
+            <span class="section-subtitle">Configurador Profesional</span>
+            <h1 class="section-title">Tu próximo equipo comienza aquí</h1>
+            <p class="setup-description">Completa el formulario y recibe una propuesta técnica detallada en menos de 24 horas.</p>
+        </div>
+
+        <div class="setup-container">
+            <form class="setup-form" action="/solicitar-montaje" method="POST">
+                
+                <div class="form-group">
+                    <label>Tipo de Sistema</label>
+                    <div class="type-selector">
+                        <input type="radio" name="tipo" id="pc" value="pc" checked>
+                        <label for="pc" class="type-card">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🖥️</div>
+                            <span>Sobremesa</span>
+                        </label>
+
+                        <input type="radio" name="tipo" id="laptop" value="laptop">
+                        <label for="laptop" class="type-card">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">💻</div>
+                            <span>Portátil</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="presupuesto">Presupuesto (aprox. €)</label>
+                        <input type="number" id="presupuesto" name="presupuesto" placeholder="Ej: 1500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="uso">Uso Principal</label>
+                        <select id="uso" name="uso">
+                            <option value="gaming">Gaming / Streaming</option>
+                            <option value="work">Diseño / Edición 4K</option>
+                            <option value="office">Ofimática Avanzada</option>
+                            <option value="ai">IA / Deep Learning</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="detalles">Requerimientos o componentes específicos</label>
+                    <textarea id="detalles" name="detalles" rows="5" placeholder="¿Tienes preferencia por alguna marca? ¿Necesitas mucho almacenamiento o WiFi 6E?"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Solicitud de Montaje</button>
+            </form>
+
+            <aside class="setup-info">
+                <div class="info-card">
+                    <h4>Garantía TechRM</h4>
+                    <ul>
+                        <li>
+                            <div class="step">1</div>
+                            <div><strong>Asesoría:</strong> Seleccionamos componentes compatibles al 100%.</div>
+                        </li>
+                        <li>
+                            <div class="step">2</div>
+                            <div><strong>Montaje:</strong> Gestión de cableado profesional (Clean Build).</div>
+                        </li>
+                        <li>
+                            <div class="step">3</div>
+                            <div><strong>Testing:</strong> 48h de pruebas de estrés térmico y rendimiento.</div>
+                        </li>
+                        <li>
+                            <div class="step">4</div>
+                            <div><strong>Soporte:</strong> Garantía integral y soporte técnico prioritario.</div>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Cargar preferencia guardada
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+</html>

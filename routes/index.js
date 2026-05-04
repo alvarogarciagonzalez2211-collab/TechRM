@@ -23,6 +23,13 @@ router.get('/software', (req, res) => {
   });
 });
 
+router.get('/montaje', (req, res) => {
+  res.render('montaje', {
+    title: 'TechRM - Montaje',
+    currentPage: 'montaje'
+  });
+});
+
 router.get('/nosotros', (req, res) => {
   res.render('nosotros', {
     title: 'TechRM - Sobre Nosotros',

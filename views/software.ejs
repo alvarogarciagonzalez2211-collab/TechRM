@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechRM - Innovación en Software</title>
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
         :root {
             --bg-dark: #0b0c12;
@@ -16,27 +17,43 @@
             --nav-bg: rgba(11, 12, 16, 0.95);
             --nav-border: rgba(255,255,255,0.05);
         }
-
-        .light-mode {
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+       .light-mode {
+            /* Fondos y textos */
             --bg-dark: #ffffff;
-            --card-bg: #f8f9fa;
-            --accent-purple: #6f42c1;
-            --accent-purple-dark: #5a32a3;
-            --text-main: #212529;
-            --text-muted: #6c757d;
+            --card-bg: #f3f4f6;
+            --text-main: #111827;     /* Gris casi negro para mejor lectura */
+            --text-muted: #4b5563;    /* Gris medio */
             --border-color: rgba(0, 0, 0, 0.1);
-            --nav-bg: rgba(248, 249, 250, 0.95);
-            --nav-border: rgba(0,0,0,0.05);
+            
+            /* Colores de acento (Versiones más profundas) */
+            --accent-purple: #6d28d9;       /* Morado intenso */
+            --accent-purple-dark: #4c1d95;
+            --accent-blue: #1d4ed8;         /* Azul real profundo */
+            --accent-blue-dark: #1e3a8a;
+            
+            /* Navbar y elementos específicos */
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --nav-border: rgba(0, 0, 0, 0.05);
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Agregado para consistencia */
             margin: 0;
             line-height: 1.6;
             min-height: 100vh;
-        }
+            
+            /* ESTO ES LO QUE FALTA: */
+            font-size: 16px; /* Define la base para que 0.75rem sea igual en todas las páginas */
+            -webkit-font-smoothing: antialiased; /* Evita que la fuente se vea más "gruesa" o tosca */
+            -moz-osx-font-smoothing: grayscale;
+            }
 
         /* Hero Software */
         .hero-software {

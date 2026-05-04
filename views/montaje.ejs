@@ -162,7 +162,7 @@
             border: 1px solid var(--card-border);
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.06);
-            color: var(--text-main);
+            color: var(--text-muted);
             font-family: inherit;
             padding: 0.82rem 0.9rem;
         }
@@ -438,7 +438,7 @@
         .light-mode select,
         .light-mode textarea {
             background: #ffffff;
-            color: var(--text-main);
+            color: var(--text-muted);
             border-color: rgba(23, 32, 51, 0.14);
         }
 
@@ -549,10 +549,11 @@
                 <div class="form-group">
                     <label for="uso">Uso principal</label>
                     <select id="uso" name="uso">
-                        <option>Gaming / Streaming</option>
-                        <option>Edición / 3D / IA</option>
-                        <option>Oficina / Empresa</option>
-                        <option>No estoy seguro</option>
+                        <option value="">Selecciona una opción</option>
+                        <option value="gaming">Gaming / Streaming</option>
+                        <option value="edicion">Edición / 3D / IA</option>
+                        <option value="oficina">Oficina / Empresa</option>
+                        <option value="incerto">No estoy seguro</option>
                     </select>
                 </div>
             </div>

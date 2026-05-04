@@ -3,284 +3,573 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechRM - Innovación en Software</title>
+    <title>TechRM - Soluciones de Software</title>
     <link rel="stylesheet" href="/css/styles.css">
     <style>
         :root {
             --bg-dark: #0b0c12;
-            --card-bg: #16171f;
-            --accent-purple: #8b5cf6;
-            --accent-purple-dark: #7c3aed;
+            --bg-panel: #11131a;
+            --card-bg: #171923;
+            --card-soft: #202431;
+            --accent-violet: #a78bfa;
+            --accent-cyan: #67e8f9;
+            --accent-green: #86efac;
+            --accent-rose: #f0abfc;
             --text-main: #ffffff;
-            --text-muted: #8b8e9f;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --form-input: #1c1e26;
             --nav-bg: rgba(11, 12, 16, 0.95);
-            --nav-border: rgba(255,255,255,0.05);
+            --nav-border: rgba(255, 255, 255, 0.05);
         }
+
         * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        }
-       .light-mode {
-            /* Fondos y textos */
-            --bg-dark: #ffffff;
-            --card-bg: #f3f4f6;
-            --text-main: #111827;     /* Gris casi negro para mejor lectura */
-            --text-muted: #4b5563;    /* Gris medio */
-            --border-color: rgba(0, 0, 0, 0.1);
-            
-            /* Colores de acento (Versiones más profundas) */
-            --accent-purple: #6d28d9;       /* Morado intenso */
-            --accent-purple-dark: #4c1d95;
-            --accent-blue: #1d4ed8;         /* Azul real profundo */
-            --accent-blue-dark: #1e3a8a;
-            
-            /* Navbar y elementos específicos */
-            --nav-bg: rgba(255, 255, 255, 0.9);
-            --nav-border: rgba(0, 0, 0, 0.05);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Agregado para consistencia */
-            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
             line-height: 1.6;
             min-height: 100vh;
-            
-            /* ESTO ES LO QUE FALTA: */
-            font-size: 16px; /* Define la base para que 0.75rem sea igual en todas las páginas */
-            -webkit-font-smoothing: antialiased; /* Evita que la fuente se vea más "gruesa" o tosca */
-            -moz-osx-font-smoothing: grayscale;
-            }
-
-        /* Hero Software */
-        .hero-software {
-            text-align: center;
-            padding: 8rem 2rem 6rem;
-            background: radial-gradient(circle at top, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
         }
 
-        .badge-software {
-            display: inline-block;
-            border: 1px solid var(--accent-purple);
-            padding: 0.3rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
+        .software-hero {
+            min-height: 620px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+            align-items: center;
+            gap: 4rem;
+            padding: 9rem 6% 5rem;
+            background:
+                linear-gradient(90deg, rgba(11, 12, 18, 0.98) 0%, rgba(11, 12, 18, 0.86) 50%, rgba(11, 12, 18, 0.26) 100%),
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=85&w=1800') center/cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-copy {
+            max-width: 740px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            color: var(--accent-cyan);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--text-main);
+            margin-bottom: 1.4rem;
+        }
+
+        .software-hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            line-height: 0.98;
+            max-width: 790px;
+            margin-bottom: 1.5rem;
+        }
+
+        .software-hero h1 span {
+            color: var(--accent-violet);
+        }
+
+        .hero-copy p {
+            color: var(--text-muted);
+            max-width: 620px;
+            font-size: 1.08rem;
             margin-bottom: 2rem;
         }
 
-        .hero-software h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-        }
-
-        .hero-software h1 span { color: var(--accent-purple); }
-
-        .hero-software p {
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            font-size: 1.05rem;
-        }
-
-        .hero-buttons {
+        .hero-actions {
             display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.4rem;
+        }
+
+        .btn-service {
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .btn-primary {
-            background: var(--accent-purple);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: none;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        .btn-secondary {
+            min-height: 46px;
+            padding: 0.85rem 1.35rem;
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            font-weight: 700;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.4px;
             text-transform: uppercase;
-            font-size: 0.8rem;
             cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
         }
 
-        /* Services Section */
-        .section-container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
-
-        .section-title-line {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            border-bottom: 3px solid var(--accent-purple);
-            display: inline-block;
-            padding-bottom: 10px;
+        .btn-service:hover,
+        .btn-service:focus {
+            transform: translateY(-2px);
+            border-color: rgba(103, 232, 249, 0.55);
+            background: rgba(255, 255, 255, 0.06);
         }
 
-        .services-grid {
+        .btn-primary-service {
+            background: var(--accent-cyan);
+            color: #06333b;
+            border-color: transparent;
+        }
+
+        .hero-metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            max-width: 720px;
+        }
+
+        .metric {
+            border: 1px solid var(--border-color);
+            background: rgba(17, 19, 26, 0.74);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.25rem;
+            line-height: 1;
+            margin-bottom: 0.45rem;
+        }
+
+        .metric span {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .hero-panel {
+            align-self: stretch;
+            min-height: 420px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(17, 19, 26, 0.82);
+            display: grid;
+            align-content: end;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .interface-preview {
+            position: absolute;
+            inset: 1rem;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 1rem;
+        }
+
+        .preview-topbar,
+        .preview-grid > div,
+        .preview-chart {
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .preview-topbar {
+            height: 52px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-rose);
+        }
+
+        .dot:nth-child(2) { background: var(--accent-cyan); }
+        .dot:nth-child(3) { background: var(--accent-green); }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 1rem;
+        }
+
+        .preview-grid > div {
+            min-height: 180px;
+        }
+
+        .preview-chart {
+            background:
+                linear-gradient(180deg, rgba(103, 232, 249, 0.22), rgba(255, 255, 255, 0.04)),
+                repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,0.04) 18px 19px);
+        }
+
+        .panel-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            background: rgba(11, 12, 18, 0.82);
+            backdrop-filter: blur(10px);
+        }
+
+        .panel-content h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .panel-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
             gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            line-height: 1.05;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            max-width: 460px;
+            font-size: 0.95rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
         }
 
         .service-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 3rem 2.5rem;
-            border-radius: 12px;
-            transition: transform 0.3s ease;
+            border-radius: 8px;
+            padding: 1.35rem;
+            min-height: 100%;
         }
 
-        .service-card:hover { transform: translateY(-5px); }
-
-        .service-card svg { margin-bottom: 1.5rem; color: var(--accent-purple); }
-
-        .service-card h3 { margin-bottom: 1rem; font-size: 1.4rem; }
-
-        .service-card p { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* Proceso ¿Cómo empezamos? */
-        .process-section {
-            text-align: center;
-            padding: 6rem 2rem;
-        }
-
-        .process-grid {
+        .service-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 8px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
+            place-items: center;
+            margin-bottom: 1.1rem;
+            color: #0b0c12;
+            background: var(--accent-cyan);
+            font-weight: 900;
         }
 
-        .process-step .step-num {
-            width: 45px; height: 45px;
-            background: var(--accent-purple);
+        .service-icon.violet { background: var(--accent-violet); }
+        .service-icon.green { background: var(--accent-green); }
+        .service-icon.rose { background: var(--accent-rose); }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            line-height: 1.2;
+            margin-bottom: 0.7rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        .use-cases {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .use-case-image {
+            min-height: 430px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background:
+                linear-gradient(180deg, rgba(11, 12, 18, 0.12), rgba(11, 12, 18, 0.72)),
+                url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=85&w=1000') center/cover;
+        }
+
+        .use-case-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .use-case {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .use-case strong {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
             border-radius: 50%;
-            display: flex;
+            background: var(--accent-cyan);
+            color: #06333b;
+        }
+
+        .use-case h3 {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .use-case p {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        .workflow {
+            margin-top: 4rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .workflow-step {
+            background: var(--card-soft);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.1rem;
+        }
+
+        .workflow-step strong {
+            display: inline-flex;
+            width: 32px;
+            height: 32px;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-weight: 800;
+            border-radius: 50%;
+            background: var(--accent-violet);
+            color: #170d2d;
+            margin-bottom: 1rem;
         }
 
-        .process-step h4 { margin-bottom: 1rem; font-size: 1.2rem; }
-        .process-step p { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* Contact Box */
-        .contact-box {
-            background: #111218;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            overflow: hidden;
-            margin-top: 4rem;
+        .workflow-step h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
 
-        .contact-info { padding: 4rem; border-right: 1px solid var(--border-color); }
-        .contact-form { padding: 4rem; background: rgba(255,255,255,0.02); }
-
-        .contact-info h2 { font-size: 2.5rem; margin-bottom: 2rem; }
-        
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+        .workflow-step p {
             color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .contact-section {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 2rem;
+        }
+
+        .contact-copy {
+            background: linear-gradient(160deg, rgba(103, 232, 249, 0.15), rgba(17, 19, 26, 1));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .contact-copy h2 {
+            font-size: 2rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .contact-copy p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .trust-list {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .trust-item {
+            padding: 0.85rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            color: #d7dce5;
+            font-size: 0.88rem;
+        }
+
+        .contact-form {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .success-banner {
+            margin-bottom: 1.25rem;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(134, 239, 172, 0.45);
+            border-radius: 8px;
+            background: rgba(134, 239, 172, 0.12);
+            color: #bff7d2;
+            font-weight: 700;
             font-size: 0.9rem;
         }
 
-        .form-group { margin-bottom: 2rem; }
-        .form-group label {
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.4rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
             display: block;
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-size: 0.72rem;
+            font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 0.8rem;
-            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            color: #d1d5db;
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
-            background: rgba(255,255,255,0.03);
+            background: var(--form-input);
             border: 1px solid var(--border-color);
-            padding: 1rem;
-            border-radius: 6px;
-            color: white;
-            font-family: inherit;
-        }
-        .form-group select{
-            color: rgb(80, 79, 79);
-            
-        }
-
-
-       
-        .btn-submit-full {
-            width: 100%;
-            background: var(--accent-purple);
-            color: white;
-            padding: 1.2rem;
             border-radius: 8px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            font-size: 0.85rem;
+            padding: 0.9rem 1rem;
+            color: var(--text-main);
+            font-family: inherit;
+            resize: vertical;
         }
 
-        /* Footer */
+        .btn-submit {
+            width: 100%;
+            margin-top: 1.4rem;
+            background: var(--accent-cyan);
+            color: #06333b;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
         footer {
-            padding: 4rem 6%;
+            padding: 3rem 6%;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
-            font-size: 0.65rem;
+            gap: 1rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
-        /* Light Mode Overrides */
-        .light-mode nav {
-            background: var(--nav-bg);
+        .light-mode {
+            --bg-dark: #ffffff;
+            --bg-panel: #f3f5f8;
+            --card-bg: #f8f9fa;
+            --card-soft: #ffffff;
+            --accent-violet: #6d28d9;
+            --accent-cyan: #0891b2;
+            --accent-green: #16a34a;
+            --accent-rose: #c026d3;
+            --text-main: #212529;
+            --text-muted: #5f6875;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --form-input: #ffffff;
+            --nav-bg: rgba(248, 249, 250, 0.95);
+            --nav-border: rgba(0, 0, 0, 0.05);
+        }
+
+        .light-mode .trust-item {
+            color: #343a40;
         }
 
         .light-mode .nav-links a.active {
-            color: #6f42c1;
-            border-bottom: 2px solid #6f42c1;
+            color: #6d28d9;
+            border-bottom-color: #6d28d9;
         }
 
-        .light-mode .btn-toggle {
-            border: 1px solid rgba(0,0,0,0.2);
+        @media (max-width: 1020px) {
+            .software-hero,
+            .use-cases,
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid,
+            .workflow-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        .light-mode .btn-toggle:hover {
-            background: rgba(0,0,0,0.1);
-            border-color: rgba(0,0,0,0.4);
-        }
+        @media (max-width: 720px) {
+            .software-hero {
+                padding: 8rem 1.25rem 3rem;
+                gap: 2rem;
+            }
 
-        .light-mode footer {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
+            .hero-metrics,
+            .service-grid,
+            .workflow-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
 
-        @media (max-width: 900px) {
-            .contact-box { grid-template-columns: 1fr; }
-            .contact-info { border-right: none; border-bottom: 1px solid var(--border-color); padding: 2rem; }
-            .contact-form { padding: 2rem; }
-            .hero-buttons { flex-direction: column; }
+            .section-heading {
+                display: block;
+            }
+
+            .section-heading p {
+                margin-top: 1rem;
+            }
+
+            .container {
+                padding: 3rem 1.25rem;
+            }
+
+            footer {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -288,119 +577,186 @@
 
     <%- include('navbar') %>
 
-    <header class="hero-software">
-        <span class="badge-software">Ecosistema Digital</span>
-        <h1>Innovación en <span>Software</span></h1>
-        <p>Desarrollamos soluciones digitales a medida que transforman la complejidad técnica en una ventaja competitiva para su negocio. Ingeniería de software con precisión táctil.</p>
-        <div class="hero-buttons">
-            <button class="btn-primary" onclick="document.querySelector('.contact-box').scrollIntoView({ behavior: 'smooth' })">CONSULTAR PROYECTO</button>
-            <button class="btn-secondary" onclick="document.querySelector('.section-container').scrollIntoView({ behavior: 'smooth' })">VER CATÁLOGO</button>
+    <header class="software-hero">
+        <div class="hero-copy">
+            <div class="eyebrow">Software para trabajar mejor</div>
+            <h1>Herramientas digitales que ordenan tu <span>negocio.</span></h1>
+            <p>Diseñamos webs, paneles de gestión, sistemas de venta y automatizaciones para que tu equipo trabaje con menos pasos, menos errores y más claridad.</p>
+            <div class="hero-actions">
+                <a class="btn-service btn-primary-service" href="#contacto">Consultar proyecto</a>
+                <a class="btn-service" href="#servicios">Ver servicios</a>
+            </div>
+            <div class="hero-metrics" aria-label="Ventajas del servicio de software">
+                <div class="metric">
+                    <strong>1 idea</strong>
+                    <span>La convertimos en flujo, pantallas y prioridades.</span>
+                </div>
+                <div class="metric">
+                    <strong>24h</strong>
+                    <span>Primera respuesta para entender el proyecto.</span>
+                </div>
+                <div class="metric">
+                    <strong>Simple</strong>
+                    <span>Sin tecnicismos cuando no hacen falta.</span>
+                </div>
+            </div>
         </div>
+        <aside class="hero-panel" aria-label="Interfaz de software">
+            <div class="interface-preview" aria-hidden="true">
+                <div class="preview-topbar">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="preview-grid">
+                    <div></div>
+                    <div class="preview-chart"></div>
+                </div>
+            </div>
+            <div class="panel-content">
+                <h2>Primero entendemos el trabajo real.</h2>
+                <p>Antes de escribir código, ordenamos el proceso: quién usa la herramienta, qué necesita ver y qué tareas deben quedar automatizadas.</p>
+            </div>
+        </aside>
     </header>
 
-    <div class="section-container">
-        <h2 class="section-title-line">Servicios de Ingeniería</h2>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
-                <h3>Gestión de Negocio</h3>
-                <p>Herramientas sencillas para organizar sus ventas, clientes y stock en un solo lugar. Ideal para pequeñas y medianas empresas que buscan digitalizarse.</p>
+    <main class="container">
+        <section id="servicios">
+            <div class="section-heading">
+                <h2>Servicios de software</h2>
+                <p>Soluciones pensadas para negocios que necesitan una herramienta útil, entendible y mantenible desde el primer día.</p>
             </div>
-            <div class="service-card">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                <h3>Sistemas de Venta</h3>
-                <p>Cajas registradoras modernas y fáciles de usar que se conectan con su inventario automáticamente para evitar errores.</p>
-            </div>
-            <div class="service-card">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                <h3>Páginas Web</h3>
-                <p>Creamos su presencia en Internet con diseños atractivos que cargan rápido y funcionan perfectamente en cualquier teléfono móvil.</p>
-            </div>
-            <div class="service-card">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                <h3>Soporte y Mejora</h3>
-                <p>Actualizamos y mejoramos sus programas actuales para que funcionen más rápido y sin fallos técnicos molestos.</p>
-            </div>
-        </div>
-
-        <div class="process-section">
-            <h2 style="font-size: 2.2rem;">¿Cómo empezamos?</h2>
-            <p style="color: var(--text-muted);">Tres pasos simples para transformar su idea en realidad</p>
-            
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-num">1</div>
-                    <h4>Consulta Gratis</h4>
-                    <p>Hablamos sobre sus necesidades y le asesoramos sobre la mejor solución sin compromiso.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-num">2</div>
-                    <h4>Diseño a Medida</h4>
-                    <p>Creamos un plan detallado y visual de cómo funcionará su nuevo sistema paso a paso.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-num">3</div>
-                    <h4>Lanzamiento</h4>
-                    <p>Instalamos todo y formamos a su equipo para que empiecen a trabajar con total confianza.</p>
-                </div>
-            </div>
-        </div>
-
-        <section class="contact-box">
-            <div class="contact-info">
-                <h2>¿Listo para dar el paso?</h2>
-                <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Estamos aquí para simplificar la tecnología para usted. Complete el formulario y nos pondremos en contacto hoy mismo para ayudarle.</p>
-                
-                <div class="trust-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    <span>Le llamamos en menos de 24 horas</span>
-                </div>
-                <div class="trust-item">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    <span>Sin términos técnicos confusos</span>
-                </div>
-            </div>
-            
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label>MI NOMBRE</label>
-                        <input type="text" placeholder="Juan Pérez">
-                    </div>
-                    <div class="form-group" style="display: flex; gap: 1rem; margin-bottom: 2rem;  ">
-                        <div style="flex: 1; margin-right: 1rem;">
-                            <label>MI TELÉFONO</label>
-                            <input type="text" placeholder="+34 600 123 456">
-                        </div>
-                        <div style="flex: 1; margin-left: 1rem;">
-                            <label>MI CORREO</label>
-                            <input type="email" placeholder="juan.perez@email.com">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>¿QUÉ NECESITA?</label>
-                        <select>
-                            <option value="">Seleccione una opción</option>
-                            <option value="programa">Necesito un programa para mi negocio</option>
-                            <option value="pagina">Necesito una página web</option>
-                            <option value="soporte">Necesito soporte técnico</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>CUÉNTENOS MÁS (OPCIONAL)</label>
-                        <textarea rows="4" placeholder="¿En qué podemos ayudarle hoy?"></textarea>
-                    </div>
-                    <button type="button" class="btn-submit-full">SOLICITAR INFORMACIÓN GRATUITA</button>
-                </form>
+            <div class="service-grid">
+                <article class="service-card">
+                    <div class="service-icon">CRM</div>
+                    <h3>Gestión de negocio</h3>
+                    <p>Clientes, ventas, stock, citas o tareas en un panel centralizado y fácil de usar.</p>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon violet">POS</div>
+                    <h3>Sistemas de venta</h3>
+                    <p>Caja, catálogo e inventario conectados para reducir errores y ahorrar tiempo.</p>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon green">WEB</div>
+                    <h3>Páginas web</h3>
+                    <p>Presencia online rápida, clara y adaptada a móvil, con estructura pensada para convertir.</p>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon rose">API</div>
+                    <h3>Automatizaciones</h3>
+                    <p>Conectamos herramientas, formularios y datos para eliminar tareas repetitivas.</p>
+                </article>
             </div>
         </section>
-    </div>
+
+        <section class="use-cases">
+            <div class="use-case-image" aria-label="Panel de analítica y trabajo digital"></div>
+            <div class="use-case-list">
+                <article class="use-case">
+                    <strong>1</strong>
+                    <div>
+                        <h3>Para tiendas y pequeños negocios</h3>
+                        <p>Control de productos, ventas, clientes, reservas y reportes sin depender de hojas sueltas.</p>
+                    </div>
+                </article>
+                <article class="use-case">
+                    <strong>2</strong>
+                    <div>
+                        <h3>Para servicios profesionales</h3>
+                        <p>Seguimiento de clientes, presupuestos, incidencias, documentos y comunicación interna.</p>
+                    </div>
+                </article>
+                <article class="use-case">
+                    <strong>3</strong>
+                    <div>
+                        <h3>Para proyectos que ya existen</h3>
+                        <p>Mejoramos rendimiento, diseño, seguridad o funcionalidades de una aplicación que ya usas.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="workflow">
+            <div class="section-heading">
+                <h2>Cómo empezamos</h2>
+                <p>Un proceso claro para pasar de una idea difusa a una herramienta que se pueda construir y usar.</p>
+            </div>
+            <div class="workflow-grid">
+                <article class="workflow-step">
+                    <strong>1</strong>
+                    <h3>Descubrimiento</h3>
+                    <p>Entendemos el problema, usuarios, datos y objetivos del negocio.</p>
+                </article>
+                <article class="workflow-step">
+                    <strong>2</strong>
+                    <h3>Diseño funcional</h3>
+                    <p>Definimos pantallas, flujos y alcance para evitar sorpresas.</p>
+                </article>
+                <article class="workflow-step">
+                    <strong>3</strong>
+                    <h3>Desarrollo</h3>
+                    <p>Construimos por fases, priorizando lo que aporta valor antes.</p>
+                </article>
+                <article class="workflow-step">
+                    <strong>4</strong>
+                    <h3>Entrega</h3>
+                    <p>Probamos, formamos y dejamos una base mantenible para crecer.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contacto">
+            <div class="contact-copy">
+                <h2>Cuéntanos qué quieres digitalizar.</h2>
+                <p>Da igual si lo tienes muy claro o solo sabes que algo te quita demasiado tiempo. Lo ordenamos contigo y te proponemos el siguiente paso.</p>
+                <div class="trust-list">
+                    <div class="trust-item">Respuesta inicial en menos de 24 horas.</div>
+                    <div class="trust-item">Explicación clara del alcance y prioridades.</div>
+                    <div class="trust-item">Propuesta pensada para tu presupuesto y fase actual.</div>
+                </div>
+            </div>
+
+            <form class="contact-form" action="/solicitar-software" method="POST">
+                <% if (typeof success !== 'undefined' && success) { %>
+                    <div class="success-banner">Solicitud enviada. Te responderemos lo antes posible.</div>
+                <% } %>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="ejemplo@mail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" id="telefono" name="telefono" placeholder="+34 600 123 456">
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">Tipo de proyecto</label>
+                        <select id="servicio" name="servicio">
+                            <option>Gestión de negocio</option>
+                            <option>Sistema de venta</option>
+                            <option>Página web</option>
+                            <option>Automatización</option>
+                            <option>No estoy seguro</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="detalles">Detalles</label>
+                        <textarea id="detalles" name="detalles" placeholder="Qué problema quieres resolver, cómo trabajas ahora y qué te gustaría mejorar..." rows="4"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Solicitar orientación</button>
+            </form>
+        </section>
+    </main>
 
     <footer>
-        <div class="logo">TechRM</div>
-    
-        <div>© 2026 TECHRM. ENGINEERED PRECISION.</div>
+        <div class="logo">TECHRM</div>
+        <div>© 2026 TECHRM. Software claro para trabajo real.</div>
     </footer>
 
 </body>

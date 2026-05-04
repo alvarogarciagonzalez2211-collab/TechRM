@@ -3,37 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Montaje a Medida | TechRM</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Asegúrate de que la ruta sea correcta -->
+    <title>Reparación y Mantenimiento | TechRM</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Reutilizamos tus variables corregidas */
+        /* Variables Globales y Modos */
         :root {
             --bg-color: #0b0c10;
-            --bg-alt: #111218;
             --card-bg: #15161d;
             --card-inner: #1c1d26;
-            --card-inner-hover: #232530;
             --card-border: #262835;
             --text-main: #ffffff;
             --text-muted: #8b8e9f;
             --accent-blue: #93c5fd;
-            --accent-purple: #d8b4fe;
+            --accent-red: #fca5a5; /* Color para mantenimientos/alertas */
             --nav-bg: rgba(11, 12, 16, 0.2);
             --nav-border: rgba(255, 255, 255, 0.05);
         }
 
         .light-mode {
             --bg-color: #ffffff;
-            --bg-alt: #f8f9fa;
             --card-bg: #f3f4f6;
             --card-inner: #ffffff;
-            --card-inner-hover: #e5e7eb;
             --card-border: rgba(0, 0, 0, 0.1);
             --text-main: #111827;
             --text-muted: #1f2937;
             --accent-blue: #1d4ed8;
-            --accent-purple: #6d28d9;
+            --accent-red: #dc2626;
             --nav-bg: rgba(255, 255, 255, 0.2);
             --nav-border: rgba(0, 0, 0, 0.05);
         }
@@ -46,7 +41,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Nav Transparente (Efecto Glassmorphism) */
+        /* Navegación Glassmorphism */
         nav {
             position: absolute;
             top: 0;
@@ -66,8 +61,8 @@
 
         .logo { font-weight: 800; font-size: 1.5rem; }
 
-        /* Estilos del Formulario */
-        .setup-view {
+        /* Estructura de la Vista */
+        .repair-view {
             padding: 140px 4rem 6rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -82,15 +77,16 @@
             font-size: 0.8rem;
         }
         .section-title { font-size: 3rem; margin: 0.5rem 0; }
-        .setup-description { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .description { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-        .setup-container {
+        .container {
             display: grid;
             grid-template-columns: 1fr 350px;
             gap: 3rem;
         }
 
-        .setup-form {
+        /* Formulario */
+        .repair-form {
             background: var(--card-bg);
             padding: 3rem;
             border-radius: 16px;
@@ -123,24 +119,33 @@
             box-sizing: border-box;
         }
 
-        /* Selector de Tipo Estilizado */
-        .type-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .type-selector input { display: none; }
-        .type-card {
+        /* Selector de Urgencia */
+        .urgency-selector {
+            display: flex;
+            gap: 1rem;
+        }
+        .urgency-selector input { display: none; }
+        .urgency-card {
+            flex: 1;
             background: var(--card-inner);
             border: 2px solid var(--card-border);
-            padding: 2rem;
-            border-radius: 12px;
+            padding: 1rem;
+            border-radius: 8px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
-        .type-selector input:checked + .type-card {
+        #urgent:checked + .urgency-card {
+            border-color: var(--accent-red);
+            background: rgba(252, 165, 165, 0.1);
+        }
+        #normal:checked + .urgency-card {
             border-color: var(--accent-blue);
-            background: rgba(147, 197, 253, 0.05);
+            background: rgba(147, 197, 253, 0.1);
         }
 
-        /* Botón Premium */
         .btn-submit {
             width: 100%;
             padding: 1.2rem;
@@ -152,10 +157,11 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: transform 0.2s;
+            margin-top: 1rem;
         }
         .btn-submit:hover { transform: translateY(-3px); }
 
-        /* Columna de Info */
+        /* Lateral Informativo */
         .info-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -174,26 +180,15 @@
             margin-bottom: 1.5rem; 
             font-size: 0.9rem; 
             color: var(--text-muted);
-            line-height: 1.4;
         }
-        .info-card .step {
-            background: var(--accent-blue);
-            color: #1e3a8a;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        .info-card .icon {
+            color: var(--accent-blue);
             font-weight: 800;
-            font-size: 0.7rem;
         }
 
         @media (max-width: 900px) {
-            .setup-container { grid-template-columns: 1fr; }
-            .nav { padding: 1rem 2rem; }
-            .setup-view { padding: 120px 2rem; }
+            .container { grid-template-columns: 1fr; }
+            .repair-view { padding: 120px 2rem; }
             .form-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -203,7 +198,8 @@
     <nav hidden style="display: none;">
         <div class="logo">TechRM</div>
         <div style="display: flex; gap: 20px; align-items: center;">
-            <a href="/">Inicio</a>
+            <a href="/" style="color: inherit; text-decoration: none; font-size: 0.9rem;">Inicio</a>
+            <a href="/montaje" style="color: inherit; text-decoration: none; font-size: 0.9rem;">Montaje</a>
             <button id="legacy-theme-toggle" style="background: none; border: 1px solid var(--card-border); color: var(--text-main); padding: 5px 10px; cursor: pointer; border-radius: 5px;">
                 🌓
             </button>
@@ -212,76 +208,70 @@
 
     <%- include('navbar') %>
 
-    <main class="setup-view">
+    <main class="repair-view">
         <div class="section-header">
-            <span class="section-subtitle">Configurador Profesional</span>
-            <h1 class="section-title">Tu próximo equipo comienza aquí</h1>
-            <p class="setup-description">Completa el formulario y recibe una propuesta técnica detallada en menos de 24 horas.</p>
+            <span class="section-subtitle">Soporte Técnico Avanzado</span>
+            <h1 class="section-title">Devolvemos la vida a tu hardware</h1>
+            <p class="description">Diagnóstico preciso y soluciones duraderas para cualquier tipo de avería técnica o mantenimiento preventivo.</p>
         </div>
 
-        <div class="setup-container">
-            <form class="setup-form" action="/solicitar-montaje" method="POST">
+        <div class="container">
+            <form class="repair-form" action="/solicitar-reparacion" method="POST">
                 
-                <div class="form-group">
-                    <label>Tipo de Sistema</label>
-                    <div class="type-selector">
-                        <input type="radio" name="tipo" id="pc" value="pc" checked>
-                        <label for="pc" class="type-card">
-                            <div style="font-size: 2rem; margin-bottom: 10px;">🖥️</div>
-                            <span>Sobremesa</span>
-                        </label>
-
-                        <input type="radio" name="tipo" id="laptop" value="laptop">
-                        <label for="laptop" class="type-card">
-                            <div style="font-size: 2rem; margin-bottom: 10px;">💻</div>
-                            <span>Portátil</span>
-                        </label>
-                    </div>
-                </div>
-
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="presupuesto">Presupuesto (aprox. €)</label>
-                        <input type="number" id="presupuesto" name="presupuesto" placeholder="Ej: 1500" required>
+                        <label for="dispositivo">Marca y Modelo</label>
+                        <input type="text" id="dispositivo" name="dispositivo" placeholder="Ej: MacBook Pro M1 / PC Gaming Custom" required>
                     </div>
                     <div class="form-group">
-                        <label for="uso">Uso Principal</label>
-                        <select id="uso" name="uso">
-                            <option value="gaming">Gaming / Streaming</option>
-                            <option value="work">Diseño / Edición 4K</option>
-                            <option value="office">Ofimática Avanzada</option>
-                            <option value="ai">IA / Deep Learning</option>
+                        <label for="servicio">Tipo de Servicio</label>
+                        <select id="servicio" name="servicio">
+                            <option value="reparacion">Reparación de Avería</option>
+                            <option value="mantenimiento">Mantenimiento / Limpieza</option>
+                            <option value="software">Optimización de Software</option>
+                            <option value="recuperacion">Recuperación de Datos</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="detalles">Requerimientos o componentes específicos</label>
-                    <textarea id="detalles" name="detalles" rows="5" placeholder="¿Tienes preferencia por alguna marca? ¿Necesitas mucho almacenamiento o WiFi 6E?"></textarea>
+                    <label>Nivel de Urgencia</label>
+                    <div class="urgency-selector">
+                        <input type="radio" name="urgencia" id="normal" value="normal" checked>
+                        <label for="normal" class="urgency-card">Estándar (3-5 días)</label>
+
+                        <input type="radio" name="urgencia" id="urgent" value="urgente">
+                        <label for="urgent" class="urgency-card">Express (24-48h)</label>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn-submit">Enviar Solicitud de Montaje</button>
+                <div class="form-group">
+                    <label for="descripcion">Descripción del problema</label>
+                    <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describe los síntomas: ruidos extraños, no enciende, pantallazos azules..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Solicitar Diagnóstico</button>
             </form>
 
-            <aside class="setup-info">
+            <aside>
                 <div class="info-card">
-                    <h4>Garantía TechRM</h4>
+                    <h4>Nuestro Proceso</h4>
                     <ul>
                         <li>
-                            <div class="step">1</div>
-                            <div><strong>Asesoría:</strong> Seleccionamos componentes compatibles al 100%.</div>
+                            <span class="icon">✓</span>
+                            <div><strong>Recepción:</strong> Registro fotográfico del estado inicial del equipo.</div>
                         </li>
                         <li>
-                            <div class="step">2</div>
-                            <div><strong>Montaje:</strong> Gestión de cableado profesional (Clean Build).</div>
+                            <span class="icon">✓</span>
+                            <div><strong>Diagnóstico:</strong> Informe técnico detallado en menos de 24h.</div>
                         </li>
                         <li>
-                            <div class="step">3</div>
-                            <div><strong>Testing:</strong> 48h de pruebas de estrés térmico y rendimiento.</div>
+                            <span class="icon">✓</span>
+                            <div><strong>Reparación:</strong> Uso exclusivo de componentes originales o certificados.</div>
                         </li>
                         <li>
-                            <div class="step">4</div>
-                            <div><strong>Soporte:</strong> Garantía integral y soporte técnico prioritario.</div>
+                            <span class="icon">✓</span>
+                            <div><strong>Control:</strong> Pruebas finales de rendimiento y temperatura.</div>
                         </li>
                     </ul>
                 </div>
@@ -293,7 +283,6 @@
         const themeToggle = document.getElementById('legacy-theme-toggle');
         const body = document.body;
 
-        // Cargar preferencia guardada
         if (localStorage.getItem('theme') === 'light') {
             body.classList.add('light-mode');
         }

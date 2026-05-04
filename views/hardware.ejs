@@ -450,24 +450,66 @@
         }
 
         .light-mode {
-            --bg-dark: #ffffff;
-            --bg-panel: #f3f5f8;
+            --bg-dark: #f7f9fc;
+            --bg-panel: #ffffff;
             --card-bg: #f8f9fa;
             --card-soft: #ffffff;
-            --accent-blue: #007bff;
-            --accent-green: #16a34a;
-            --accent-amber: #d97706;
-            --text-main: #212529;
-            --text-muted: #5f6875;
-            --border-color: rgba(0, 0, 0, 0.1);
+            --accent-blue: #0b74d1;
+            --accent-green: #15803d;
+            --accent-amber: #b45309;
+            --text-main: #172033;
+            --text-muted: #4b5565;
+            --border-color: rgba(23, 32, 51, 0.12);
             --form-input: #ffffff;
             --nav-bg: rgba(248, 249, 250, 0.95);
             --nav-border: rgba(0, 0, 0, 0.05);
         }
 
+        .light-mode .hardware-hero {
+            background:
+                linear-gradient(90deg, rgba(247, 249, 252, 0.98) 0%, rgba(247, 249, 252, 0.88) 48%, rgba(247, 249, 252, 0.35) 100%),
+                url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=85&w=1800') center/cover;
+        }
+
+        .light-mode .stat {
+            background: rgba(255, 255, 255, 0.76);
+        }
+
+        .light-mode .hero-panel {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.86)),
+                url('https://images.unsplash.com/photo-1587202377425-8369045261ca?auto=format&fit=crop&q=85&w=900') center/cover;
+        }
+
+        .light-mode .panel-content {
+            background: rgba(255, 255, 255, 0.86);
+        }
+
+        .light-mode .service-card img {
+            filter: saturate(1.06) contrast(1.02) brightness(1.03);
+        }
+
+        .light-mode .quote-copy {
+            background: linear-gradient(160deg, rgba(11, 116, 209, 0.1), #ffffff);
+        }
+
         .light-mode .service-list,
         .light-mode .quote-option {
-            color: #343a40;
+            color: #243044;
+        }
+
+        .light-mode .quote-option {
+            background: rgba(11, 116, 209, 0.04);
+        }
+
+        .light-mode label {
+            color: #344054;
+        }
+
+        .light-mode .success-banner {
+            background: rgba(21, 128, 61, 0.1);
+            border-color: rgba(21, 128, 61, 0.24);
+            color: #166534;
         }
 
         .light-mode .nav-links a.active {
@@ -607,7 +649,7 @@
                             <li>Revisión de compatibilidad antes de comprar.</li>
                             <li>Plan de mejoras por fases si no quieres cambiar todo.</li>
                         </ul>
-                        <a class="btn-service" href="#presupuesto">Pedir orientación</a>
+                        <a class="btn-service" href="/asesoria-hardware">Ir a asesoría</a>
                     </div>
                 </article>
             </div>
@@ -642,10 +684,10 @@
             </div>
         </section>
 
-        <section class="quote-section" id="presupuesto">
+        <section class="quote-section" id="orientacion">
             <div class="quote-copy">
-                <h2>Cuéntanos qué necesitas y te guiamos.</h2>
-                <p>Si no tienes claro qué servicio elegir, usa este formulario como punto de partida. La prioridad es entender el problema, no venderte piezas porque sí.</p>
+                <h2>Elige el camino que encaja contigo.</h2>
+                <p>Ya no necesitas rellenar otro formulario desde aquí. Entra directamente en montaje o reparación y consulta el servicio concreto.</p>
                 <div class="quote-options">
                     <div class="quote-option">
                         <span>Equipo nuevo</span>
@@ -662,35 +704,13 @@
                 </div>
             </div>
 
-            <form class="quote-form" action="/solicitar-servicio" method="POST">
-                <% if (success) { %>
-                    <div class="success-banner">Solicitud enviada. Te responderemos lo antes posible.</div>
-                <% } %>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" placeholder="ejemplo@mail.com">
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="servicio">Qué necesitas</label>
-                        <select id="servicio" name="servicio">
-                            <option>Montar un equipo nuevo</option>
-                            <option>Reparar o mantener un equipo</option>
-                            <option>Asesoría antes de comprar</option>
-                            <option>No estoy seguro</option>
-                        </select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="detalles">Detalles</label>
-                        <textarea id="detalles" name="detalles" placeholder="Uso principal, presupuesto, problema o componentes que ya tienes..." rows="4"></textarea>
-                    </div>
+            <div class="quote-form">
+                <div class="quote-options">
+                    <a class="btn-service btn-primary-service" href="/montaje">Ver montaje</a>
+                    <a class="btn-service" href="/reparacion">Ver reparación</a>
+                    <a class="btn-service" href="#servicios">Comparar servicios</a>
                 </div>
-                <button type="submit" class="btn-submit">Enviar solicitud</button>
-            </form>
+            </div>
         </section>
     </main>
 

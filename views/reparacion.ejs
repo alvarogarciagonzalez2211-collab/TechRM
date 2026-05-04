@@ -4,294 +4,584 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reparación y Mantenimiento | TechRM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
-        /* Variables Globales y Modos */
         :root {
-            --bg-color: #0b0c10;
-            --card-bg: #15161d;
-            --card-inner: #1c1d26;
-            --card-border: #262835;
+            --bg-color: #0c0b0b;
+            --bg-panel: #151111;
+            --card-bg: #1c1717;
+            --card-inner: #271f1f;
+            --card-border: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
-            --text-muted: #8b8e9f;
-            --accent-blue: #93c5fd;
-            --accent-red: #fca5a5; /* Color para mantenimientos/alertas */
-            --nav-bg: rgba(11, 12, 16, 0.2);
+            --text-muted: #aaa0a0;
+            --accent-red: #ff7b7b;
+            --accent-amber: #ffc66d;
+            --accent-blue: #8ec7ff;
+            --nav-bg: rgba(12, 11, 11, 0.95);
             --nav-border: rgba(255, 255, 255, 0.05);
         }
 
-        .light-mode {
-            --bg-color: #ffffff;
-            --card-bg: #f3f4f6;
-            --card-inner: #ffffff;
-            --card-border: rgba(0, 0, 0, 0.1);
-            --text-main: #111827;
-            --text-muted: #1f2937;
-            --accent-blue: #1d4ed8;
-            --accent-red: #dc2626;
-            --nav-bg: rgba(255, 255, 255, 0.2);
-            --nav-border: rgba(0, 0, 0, 0.05);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* Navegación Glassmorphism */
-        nav {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--nav-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 4rem;
-            box-sizing: border-box;
-        }
-
-        .logo { font-weight: 800; font-size: 1.5rem; }
-
-        /* Estructura de la Vista */
-        .repair-view {
-            padding: 140px 4rem 6rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-subtitle { 
-            color: var(--accent-blue); 
-            text-transform: uppercase; 
-            font-weight: 700; 
-            letter-spacing: 1.5px; 
-            font-size: 0.8rem;
-        }
-        .section-title { font-size: 3rem; margin: 0.5rem 0; }
-        .description { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-
-        .container {
+        .repair-hero {
+            min-height: 640px;
             display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 3rem;
+            grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+            gap: 4rem;
+            align-items: center;
+            padding: 9rem 6% 5rem;
+            background:
+                linear-gradient(90deg, rgba(12, 11, 11, 0.98), rgba(12, 11, 11, 0.76)),
+                url('https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=85&w=1800') center/cover;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        /* Formulario */
-        .repair-form {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .eyebrow {
+            color: var(--accent-red);
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
         }
 
-        .form-group { margin-bottom: 2rem; }
-        .form-group label { 
-            display: block; 
-            margin-bottom: 0.8rem; 
-            font-weight: 600; 
-            font-size: 0.9rem;
+        .repair-hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5.2rem);
+            line-height: 0.98;
+            margin-bottom: 1.5rem;
         }
 
-        .form-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 2rem; 
+        .repair-hero h1 span { color: var(--accent-red); }
+
+        .repair-hero p {
+            color: var(--text-muted);
+            max-width: 620px;
+            font-size: 1.08rem;
+            margin-bottom: 2rem;
         }
 
-        input, select, textarea {
-            width: 100%;
-            padding: 1rem;
-            background: var(--card-inner);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            color: var(--text-main);
-            font-family: inherit;
-            box-sizing: border-box;
-        }
-
-        /* Selector de Urgencia */
-        .urgency-selector {
+        .hero-actions {
             display: flex;
             gap: 1rem;
-        }
-        .urgency-selector input { display: none; }
-        .urgency-card {
-            flex: 1;
-            background: var(--card-inner);
-            border: 2px solid var(--card-border);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        #urgent:checked + .urgency-card {
-            border-color: var(--accent-red);
-            background: rgba(252, 165, 165, 0.1);
-        }
-        #normal:checked + .urgency-card {
-            border-color: var(--accent-blue);
-            background: rgba(147, 197, 253, 0.1);
+            flex-wrap: wrap;
         }
 
-        .btn-submit {
-            width: 100%;
-            padding: 1.2rem;
-            background: var(--accent-blue);
-            color: #1e3a8a;
-            border: none;
+        .btn-service {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0.85rem 1.35rem;
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
             border-radius: 8px;
-            font-weight: 700;
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.4px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 1rem;
-        }
-        .btn-submit:hover { transform: translateY(-3px); }
-
-        /* Lateral Informativo */
-        .info-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 2.5rem;
-            border-radius: 16px;
-            height: fit-content;
-            position: sticky;
-            top: 140px;
+            text-decoration: none;
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
         }
 
-        .info-card h4 { color: var(--accent-blue); margin-bottom: 1.5rem; }
-        .info-card ul { list-style: none; padding: 0; }
-        .info-card li { 
-            display: flex; 
-            gap: 1rem; 
-            margin-bottom: 1.5rem; 
-            font-size: 0.9rem; 
+        .btn-service:hover,
+        .btn-service:focus {
+            transform: translateY(-2px);
+            border-color: rgba(255, 123, 123, 0.55);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-primary-service {
+            background: var(--accent-red);
+            color: #3a0707;
+            border-color: transparent;
+        }
+
+        .lead-form {
+            align-self: center;
+            border: 1px solid rgba(255, 123, 123, 0.34);
+            border-radius: 8px;
+            background: rgba(21, 17, 17, 0.9);
+            padding: 1.5rem;
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(14px);
+        }
+
+        .lead-form h2 {
+            font-size: 1.45rem;
+            line-height: 1.15;
+            margin-bottom: 0.55rem;
+        }
+
+        .lead-form p {
             color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.1rem;
         }
-        .info-card .icon {
-            color: var(--accent-blue);
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .form-group { margin-bottom: 0.85rem; }
+
+        .form-group label {
+            display: block;
+            color: #ffd0d0;
+            font-size: 0.7rem;
+            font-weight: 900;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-main);
+            font-family: inherit;
+            padding: 0.82rem 0.9rem;
+        }
+
+        textarea { resize: vertical; }
+
+        .form-submit {
+            width: 100%;
+            min-height: 46px;
+            margin-top: 0.25rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent-red);
+            color: #3a0707;
+            cursor: pointer;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .success-banner {
+            margin-bottom: 1rem;
+            padding: 0.8rem 0.9rem;
+            border: 1px solid rgba(125, 211, 168, 0.42);
+            border-radius: 8px;
+            background: rgba(125, 211, 168, 0.12);
+            color: #bdf4d0;
+            font-size: 0.86rem;
             font-weight: 800;
         }
 
-        @media (max-width: 900px) {
-            .container { grid-template-columns: 1fr; }
-            .repair-view { padding: 120px 2rem; }
-            .form-grid { grid-template-columns: 1fr; }
+        .diagnostic-board {
+            display: grid;
+            gap: 1rem;
+            padding: 1.25rem;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: rgba(21, 17, 17, 0.82);
+            backdrop-filter: blur(10px);
+        }
+
+        .board-row {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            box-shadow: 0 0 18px rgba(255, 123, 123, 0.6);
+        }
+
+        .board-row:nth-child(2) .status-dot { background: var(--accent-amber); box-shadow: 0 0 18px rgba(255, 198, 109, 0.45); }
+        .board-row:nth-child(3) .status-dot { background: var(--accent-blue); box-shadow: 0 0 18px rgba(142, 199, 255, 0.45); }
+
+        .board-row h2 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .board-row span,
+        .board-row p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            line-height: 1.05;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            max-width: 460px;
+            font-size: 0.95rem;
+        }
+
+        .repair-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .repair-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.35rem;
+        }
+
+        .repair-tag {
+            display: inline-flex;
+            margin-bottom: 1rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: var(--accent-red);
+            color: #3a0707;
+            font-size: 0.68rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .repair-tag.amber { background: var(--accent-amber); color: #3a2500; }
+        .repair-tag.blue { background: var(--accent-blue); color: #08233d; }
+
+        .repair-card h3 {
+            font-size: 1.18rem;
+            line-height: 1.2;
+            margin-bottom: 0.7rem;
+        }
+
+        .repair-card p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .timeline {
+            margin-top: 4rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .timeline-step {
+            background: var(--card-inner);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.1rem;
+        }
+
+        .timeline-step strong {
+            display: inline-flex;
+            width: 32px;
+            height: 32px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--accent-red);
+            color: #3a0707;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-step h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-step p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .cta-panel {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(160deg, rgba(255, 123, 123, 0.14), var(--bg-panel));
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+        }
+
+        .cta-panel h2 {
+            font-size: 2rem;
+            line-height: 1.1;
+            margin-bottom: 0.8rem;
+        }
+
+        .cta-panel p {
+            color: var(--text-muted);
+            max-width: 720px;
+        }
+
+        footer {
+            padding: 3rem 6%;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .light-mode {
+            --bg-color: #fff8f8;
+            --bg-panel: #ffffff;
+            --card-bg: #fffafa;
+            --card-inner: #ffffff;
+            --card-border: rgba(76, 29, 29, 0.12);
+            --text-main: #2b1a1a;
+            --text-muted: #654f4f;
+            --accent-red: #c24141;
+            --accent-amber: #b45309;
+            --accent-blue: #0b74d1;
+            --nav-bg: rgba(255, 250, 250, 0.95);
+            --nav-border: rgba(76, 29, 29, 0.08);
+        }
+
+        .light-mode .repair-hero {
+            background:
+                linear-gradient(90deg, rgba(255, 248, 248, 0.98), rgba(255, 248, 248, 0.84)),
+                url('https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=85&w=1800') center/cover;
+        }
+
+        .light-mode .diagnostic-board,
+        .light-mode .board-row {
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .light-mode .lead-form {
+            background: rgba(255, 255, 255, 0.92);
+            border-color: rgba(194, 65, 65, 0.22);
+        }
+
+        .light-mode .form-group label {
+            color: #713333;
+        }
+
+        .light-mode input,
+        .light-mode select,
+        .light-mode textarea {
+            background: #ffffff;
+            color: var(--text-main);
+            border-color: rgba(76, 29, 29, 0.14);
+        }
+
+        .light-mode .success-banner {
+            background: rgba(21, 128, 61, 0.1);
+            border-color: rgba(21, 128, 61, 0.24);
+            color: #166534;
+        }
+
+        .light-mode .cta-panel {
+            background: linear-gradient(160deg, rgba(194, 65, 65, 0.1), #ffffff);
+        }
+
+        .light-mode .nav-links a.active {
+            color: #c24141;
+            border-bottom-color: #c24141;
+        }
+
+        @media (max-width: 980px) {
+            .repair-hero,
+            .cta-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .repair-grid,
+            .timeline-grid,
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .lead-form { align-self: auto; }
+        }
+
+        @media (max-width: 720px) {
+            .repair-hero {
+                padding: 8rem 1.25rem 3rem;
+                gap: 2rem;
+            }
+
+            .repair-grid,
+            .timeline-grid,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 1rem; }
+            .container { padding: 3rem 1.25rem; }
+            footer { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <nav hidden style="display: none;">
-        <div class="logo">TechRM</div>
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <a href="/" style="color: inherit; text-decoration: none; font-size: 0.9rem;">Inicio</a>
-            <a href="/montaje" style="color: inherit; text-decoration: none; font-size: 0.9rem;">Montaje</a>
-            <button id="legacy-theme-toggle" style="background: none; border: 1px solid var(--card-border); color: var(--text-main); padding: 5px 10px; cursor: pointer; border-radius: 5px;">
-                🌓
-            </button>
-        </div>
-    </nav>
-
     <%- include('navbar') %>
 
-    <main class="repair-view">
-        <div class="section-header">
-            <span class="section-subtitle">Soporte Técnico Avanzado</span>
-            <h1 class="section-title">Devolvemos la vida a tu hardware</h1>
-            <p class="description">Diagnóstico preciso y soluciones duraderas para cualquier tipo de avería técnica o mantenimiento preventivo.</p>
+    <header class="repair-hero">
+        <div>
+            <div class="eyebrow">Diagnóstico y reparación</div>
+            <h1>Cuando algo falla, buscamos la causa <span>antes de cambiar piezas.</span></h1>
+            <p>Reparamos equipos que no arrancan, se calientan, hacen ruido, van lentos o presentan fallos intermitentes. El objetivo es darte una explicación clara y una solución realista.</p>
+            <div class="hero-actions">
+                <a class="btn-service btn-primary-service" href="#solicitud">Pedir diagnóstico</a>
+                <a class="btn-service" href="/hardware">Volver a hardware</a>
+            </div>
         </div>
 
-        <div class="container">
-            <form class="repair-form" action="/solicitar-reparacion" method="POST">
-                
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="dispositivo">Marca y Modelo</label>
-                        <input type="text" id="dispositivo" name="dispositivo" placeholder="Ej: MacBook Pro M1 / PC Gaming Custom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="servicio">Tipo de Servicio</label>
-                        <select id="servicio" name="servicio">
-                            <option value="reparacion">Reparación de Avería</option>
-                            <option value="mantenimiento">Mantenimiento / Limpieza</option>
-                            <option value="software">Optimización de Software</option>
-                            <option value="recuperacion">Recuperación de Datos</option>
-                        </select>
-                    </div>
-                </div>
-
+        <form class="lead-form" id="solicitud" action="/solicitar-reparacion" method="POST">
+            <h2>Solicita diagnóstico rápido</h2>
+            <p>Cuéntanos el síntoma principal y te orientamos con el siguiente paso.</p>
+            <% if (success) { %>
+                <div class="success-banner">Solicitud enviada. Te responderemos lo antes posible.</div>
+            <% } %>
+            <div class="form-row">
                 <div class="form-group">
-                    <label>Nivel de Urgencia</label>
-                    <div class="urgency-selector">
-                        <input type="radio" name="urgencia" id="normal" value="normal" checked>
-                        <label for="normal" class="urgency-card">Estándar (3-5 días)</label>
-
-                        <input type="radio" name="urgencia" id="urgent" value="urgente">
-                        <label for="urgent" class="urgency-card">Express (24-48h)</label>
-                    </div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="descripcion">Descripción del problema</label>
-                    <textarea id="descripcion" name="descripcion" rows="5" placeholder="Describe los síntomas: ruidos extraños, no enciende, pantallazos azules..."></textarea>
+                    <label for="contacto">Contacto</label>
+                    <input type="text" id="contacto" name="contacto" placeholder="Email o teléfono" required>
                 </div>
-
-                <button type="submit" class="btn-submit">Solicitar Diagnóstico</button>
-            </form>
-
-            <aside>
-                <div class="info-card">
-                    <h4>Nuestro Proceso</h4>
-                    <ul>
-                        <li>
-                            <span class="icon">✓</span>
-                            <div><strong>Recepción:</strong> Registro fotográfico del estado inicial del equipo.</div>
-                        </li>
-                        <li>
-                            <span class="icon">✓</span>
-                            <div><strong>Diagnóstico:</strong> Informe técnico detallado en menos de 24h.</div>
-                        </li>
-                        <li>
-                            <span class="icon">✓</span>
-                            <div><strong>Reparación:</strong> Uso exclusivo de componentes originales o certificados.</div>
-                        </li>
-                        <li>
-                            <span class="icon">✓</span>
-                            <div><strong>Control:</strong> Pruebas finales de rendimiento y temperatura.</div>
-                        </li>
-                    </ul>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dispositivo">Equipo</label>
+                    <input type="text" id="dispositivo" name="dispositivo" placeholder="PC, portátil, modelo...">
                 </div>
-            </aside>
-        </div>
+                <div class="form-group">
+                    <label for="urgencia">Urgencia</label>
+                    <select id="urgencia" name="urgencia">
+                        <option>Normal</option>
+                        <option>Express</option>
+                        <option>No estoy seguro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Qué le pasa</label>
+                <textarea id="descripcion" name="descripcion" rows="3" placeholder="No enciende, se calienta, va lento, hace ruido..."></textarea>
+            </div>
+            <button class="form-submit" type="submit">Solicitar diagnóstico</button>
+        </form>
+    </header>
+
+    <main class="container">
+        <section id="fallos">
+            <div class="section-heading">
+                <h2>Qué revisamos</h2>
+                <p>La reparación se enfoca como diagnóstico: identificar síntomas, aislar la causa y aplicar la solución con menos ensayo y error.</p>
+            </div>
+
+            <div class="repair-grid">
+                <article class="repair-card">
+                    <span class="repair-tag">Averías</span>
+                    <h3>No arranca o se apaga</h3>
+                    <p>Revisión de fuente, placa, memoria, GPU, discos y cableado interno.</p>
+                </article>
+                <article class="repair-card">
+                    <span class="repair-tag amber">Mantenimiento</span>
+                    <h3>Ruido y temperatura</h3>
+                    <p>Limpieza interna, ventiladores, pasta térmica y curva de refrigeración.</p>
+                </article>
+                <article class="repair-card">
+                    <span class="repair-tag blue">Optimización</span>
+                    <h3>Lentitud o bloqueos</h3>
+                    <p>Diagnóstico de almacenamiento, sistema, procesos, RAM y salud general.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="timeline">
+            <div class="section-heading">
+                <h2>Proceso técnico</h2>
+                <p>Un recorrido claro para que sepas en qué punto está tu equipo y qué se va a hacer.</p>
+            </div>
+            <div class="timeline-grid">
+                <article class="timeline-step">
+                    <strong>1</strong>
+                    <h3>Recepción</h3>
+                    <p>Registramos síntomas y estado físico del equipo.</p>
+                </article>
+                <article class="timeline-step">
+                    <strong>2</strong>
+                    <h3>Diagnóstico</h3>
+                    <p>Aislamos la causa con pruebas de hardware y software.</p>
+                </article>
+                <article class="timeline-step">
+                    <strong>3</strong>
+                    <h3>Solución</h3>
+                    <p>Aplicamos reparación, limpieza, ajuste o sustitución.</p>
+                </article>
+                <article class="timeline-step">
+                    <strong>4</strong>
+                    <h3>Validación</h3>
+                    <p>Probamos estabilidad, temperatura y rendimiento final.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta-panel">
+            <div>
+                <h2>¿No sabes si reparar o actualizar?</h2>
+                <p>Si la reparación no compensa, te lo diremos. Puedes comparar con asesoría o pasar a montaje si conviene empezar desde cero.</p>
+            </div>
+            <a class="btn-service btn-primary-service" href="/asesoria-hardware">Comparar opciones</a>
+        </section>
     </main>
 
-    <script>
-        const themeToggle = document.getElementById('legacy-theme-toggle');
-        const body = document.body;
+    <footer>
+        <div class="logo">TECHRM</div>
+        <div>© 2026 TECHRM. Diagnóstico claro antes de tocar el equipo.</div>
+    </footer>
 
-        if (localStorage.getItem('theme') === 'light') {
-            body.classList.add('light-mode');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
-            localStorage.setItem('theme', theme);
-        });
-    </script>
 </body>
 </html>

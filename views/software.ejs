@@ -504,24 +504,76 @@
         }
 
         .light-mode {
-            --bg-dark: #ffffff;
-            --bg-panel: #f3f5f8;
+            --bg-dark: #f7f9fc;
+            --bg-panel: #ffffff;
             --card-bg: #f8f9fa;
             --card-soft: #ffffff;
             --accent-violet: #6d28d9;
-            --accent-cyan: #0891b2;
-            --accent-green: #16a34a;
-            --accent-rose: #c026d3;
-            --text-main: #212529;
-            --text-muted: #5f6875;
-            --border-color: rgba(0, 0, 0, 0.1);
+            --accent-cyan: #087f9b;
+            --accent-green: #15803d;
+            --accent-rose: #a21caf;
+            --text-main: #172033;
+            --text-muted: #4b5565;
+            --border-color: rgba(23, 32, 51, 0.12);
             --form-input: #ffffff;
             --nav-bg: rgba(248, 249, 250, 0.95);
             --nav-border: rgba(0, 0, 0, 0.05);
         }
 
+        .light-mode .software-hero {
+            background:
+                linear-gradient(90deg, rgba(247, 249, 252, 0.98) 0%, rgba(247, 249, 252, 0.9) 50%, rgba(247, 249, 252, 0.38) 100%),
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=85&w=1800') center/cover;
+        }
+
+        .light-mode .metric {
+            background: rgba(255, 255, 255, 0.78);
+        }
+
+        .light-mode .hero-panel {
+            background: rgba(255, 255, 255, 0.86);
+        }
+
+        .light-mode .preview-topbar,
+        .light-mode .preview-grid > div,
+        .light-mode .preview-chart {
+            background: rgba(8, 127, 155, 0.07);
+        }
+
+        .light-mode .preview-chart {
+            background:
+                linear-gradient(180deg, rgba(8, 127, 155, 0.16), rgba(255, 255, 255, 0.62)),
+                repeating-linear-gradient(90deg, transparent 0 18px, rgba(23, 32, 51, 0.06) 18px 19px);
+        }
+
+        .light-mode .panel-content {
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        .light-mode .use-case-image {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.32)),
+                url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=85&w=1000') center/cover;
+            filter: saturate(1.04) contrast(1.02) brightness(1.03);
+        }
+
+        .light-mode .contact-copy {
+            background: linear-gradient(160deg, rgba(8, 127, 155, 0.1), #ffffff);
+        }
+
         .light-mode .trust-item {
-            color: #343a40;
+            color: #243044;
+            background: rgba(8, 127, 155, 0.04);
+        }
+
+        .light-mode label {
+            color: #344054;
+        }
+
+        .light-mode .success-banner {
+            background: rgba(21, 128, 61, 0.1);
+            border-color: rgba(21, 128, 61, 0.24);
+            color: #166534;
         }
 
         .light-mode .nav-links a.active {
@@ -717,40 +769,17 @@
                 </div>
             </div>
 
-            <form class="contact-form" action="/solicitar-software" method="POST">
-                <% if (typeof success !== 'undefined' && success) { %>
-                    <div class="success-banner">Solicitud enviada. Te responderemos lo antes posible.</div>
-                <% } %>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" placeholder="ejemplo@mail.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="text" id="telefono" name="telefono" placeholder="+34 600 123 456">
-                    </div>
-                    <div class="form-group">
-                        <label for="servicio">Tipo de proyecto</label>
-                        <select id="servicio" name="servicio">
-                            <option>Gestión de negocio</option>
-                            <option>Sistema de venta</option>
-                            <option>Página web</option>
-                            <option>Automatización</option>
-                            <option>No estoy seguro</option>
-                        </select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="detalles">Detalles</label>
-                        <textarea id="detalles" name="detalles" placeholder="Qué problema quieres resolver, cómo trabajas ahora y qué te gustaría mejorar..." rows="4"></textarea>
-                    </div>
+            <div class="contact-form">
+                <div class="trust-list">
+                    <div class="trust-item">Web corporativa, catálogo, tienda o landing de servicio.</div>
+                    <div class="trust-item">Panel interno para clientes, ventas, inventario o incidencias.</div>
+                    <div class="trust-item">Automatizaciones para conectar herramientas y ahorrar tareas manuales.</div>
                 </div>
-                <button type="submit" class="btn-submit">Solicitar orientación</button>
-            </form>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.4rem;">
+                    <a class="btn-service btn-primary-service" href="#servicios">Elegir solución</a>
+                    <a class="btn-service" href="/nosotros">Conocer TechRM</a>
+                </div>
+            </div>
         </section>
     </main>
 

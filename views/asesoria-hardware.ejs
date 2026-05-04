@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Montaje a Medida | TechRM</title>
+    <title>Asesoría Hardware | TechRM</title>
     <link rel="stylesheet" href="/css/styles.css">
     <style>
         :root {
@@ -21,39 +21,33 @@
             --nav-border: rgba(255, 255, 255, 0.05);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            background: var(--bg-color);
             color: var(--text-main);
             font-family: 'Inter', system-ui, sans-serif;
             line-height: 1.6;
             min-height: 100vh;
         }
 
-        .mount-hero {
+        .advice-hero {
             min-height: 620px;
             display: grid;
-            grid-template-columns: minmax(0, 0.9fr) minmax(380px, 1.1fr);
+            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
             align-items: center;
             gap: 4rem;
             padding: 9rem 6% 5rem;
             background:
-                radial-gradient(circle at 72% 32%, rgba(127, 199, 255, 0.24), transparent 34%),
-                linear-gradient(135deg, rgba(11, 12, 16, 1) 0%, rgba(9, 18, 30, 0.96) 52%, rgba(11, 12, 16, 0.86) 100%);
+                radial-gradient(circle at 18% 28%, rgba(244, 197, 106, 0.22), transparent 32%),
+                linear-gradient(145deg, rgba(16, 13, 8, 1), rgba(26, 20, 10, 0.98) 52%, rgba(11, 12, 16, 0.94));
             border-bottom: 1px solid var(--card-border);
         }
 
-        .hero-copy {
-            max-width: 720px;
-        }
+        .hero-copy { max-width: 720px; }
 
         .eyebrow {
-            color: var(--accent-blue);
+            color: var(--accent-amber);
             font-size: 0.78rem;
             font-weight: 900;
             letter-spacing: 1.5px;
@@ -61,15 +55,13 @@
             margin-bottom: 1.4rem;
         }
 
-        .mount-hero h1 {
-            font-size: clamp(2.8rem, 6vw, 5.4rem);
+        .advice-hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5.3rem);
             line-height: 0.98;
             margin-bottom: 1.5rem;
         }
 
-        .mount-hero h1 span {
-            color: var(--accent-blue);
-        }
+        .advice-hero h1 span { color: var(--accent-amber); }
 
         .hero-copy p {
             color: var(--text-muted);
@@ -106,21 +98,21 @@
         .btn-service:hover,
         .btn-service:focus {
             transform: translateY(-2px);
-            border-color: rgba(127, 199, 255, 0.55);
+            border-color: rgba(244, 197, 106, 0.55);
             background: rgba(255, 255, 255, 0.06);
         }
 
         .btn-primary-service {
-            background: var(--accent-blue);
-            color: #08233d;
+            background: var(--accent-amber);
+            color: #3a2500;
             border-color: transparent;
         }
 
         .lead-form {
             align-self: center;
-            border: 1px solid rgba(127, 199, 255, 0.34);
+            border: 1px solid rgba(244, 197, 106, 0.34);
             border-radius: 8px;
-            background: rgba(17, 19, 26, 0.9);
+            background: rgba(26, 20, 10, 0.9);
             padding: 1.5rem;
             box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
             backdrop-filter: blur(14px);
@@ -148,7 +140,7 @@
 
         .form-group label {
             display: block;
-            color: #d7e9ff;
+            color: #ffe7ba;
             font-size: 0.7rem;
             font-weight: 900;
             margin-bottom: 0.4rem;
@@ -175,8 +167,8 @@
             margin-top: 0.25rem;
             border: none;
             border-radius: 8px;
-            background: var(--accent-blue);
-            color: #08233d;
+            background: var(--accent-amber);
+            color: #3a2500;
             cursor: pointer;
             font-weight: 900;
             text-transform: uppercase;
@@ -193,7 +185,7 @@
             font-weight: 800;
         }
 
-        .build-preview {
+        .decision-panel {
             align-self: stretch;
             min-height: 420px;
             display: grid;
@@ -202,26 +194,30 @@
             border-radius: 8px;
             overflow: hidden;
             background:
-                linear-gradient(180deg, rgba(23, 25, 35, 0.08), rgba(23, 25, 35, 0.9)),
-                url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=85&w=1000') center/cover;
+                linear-gradient(180deg, rgba(23, 25, 35, 0.12), rgba(23, 25, 35, 0.9)),
+                url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=85&w=1000') center/cover;
             position: relative;
         }
 
-        .build-preview::before {
-            content: "";
+        .decision-panel::before {
+            content: "CPU  GPU  RAM  PSU  SSD";
             position: absolute;
-            inset: 1rem;
-            border: 1px solid rgba(127, 199, 255, 0.28);
+            top: 1rem;
+            left: 1rem;
+            right: 1rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(244, 197, 106, 0.28);
             border-radius: 6px;
-            background:
-                linear-gradient(90deg, rgba(127, 199, 255, 0.16) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(127, 199, 255, 0.12) 1px, transparent 1px);
-            background-size: 34px 34px;
-            opacity: 0.75;
-            pointer-events: none;
+            color: rgba(244, 197, 106, 0.78);
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 1.4px;
+            word-spacing: 1.2rem;
+            background: rgba(11, 12, 16, 0.36);
+            backdrop-filter: blur(8px);
         }
 
-        .preview-content {
+        .panel-content {
             position: relative;
             z-index: 2;
             padding: 1.5rem;
@@ -229,12 +225,12 @@
             backdrop-filter: blur(10px);
         }
 
-        .preview-content h2 {
+        .panel-content h2 {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
         }
 
-        .preview-content p {
+        .panel-content p {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
@@ -264,99 +260,95 @@
             font-size: 0.95rem;
         }
 
-        .build-grid {
+        .advice-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1.25rem;
         }
 
-        .build-card {
+        .advice-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 8px;
-            overflow: hidden;
-            min-height: 100%;
-        }
-
-        .build-card img {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            filter: saturate(0.96) contrast(1.04);
-        }
-
-        .build-card-body {
             padding: 1.35rem;
         }
 
-        .build-tag {
+        .advice-tag {
             display: inline-flex;
             margin-bottom: 1rem;
             padding: 0.25rem 0.65rem;
             border-radius: 999px;
-            background: var(--accent-blue);
-            color: #08233d;
+            background: var(--accent-amber);
+            color: #3a2500;
             font-size: 0.68rem;
             font-weight: 900;
             text-transform: uppercase;
         }
 
-        .build-tag.green { background: var(--accent-green); }
-        .build-tag.amber { background: var(--accent-amber); }
+        .advice-tag.blue { background: var(--accent-blue); color: #08233d; }
+        .advice-tag.green { background: var(--accent-green); color: #082411; }
 
-        .build-card h3 {
+        .advice-card h3 {
             font-size: 1.18rem;
             line-height: 1.2;
             margin-bottom: 0.7rem;
         }
 
-        .build-card p {
+        .advice-card p {
             color: var(--text-muted);
             font-size: 0.88rem;
         }
 
-        .workflow {
+        .compare-section {
             margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .compare-image {
+            min-height: 430px;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background:
+                linear-gradient(180deg, rgba(11, 12, 16, 0.08), rgba(11, 12, 16, 0.68)),
+                url('https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&q=85&w=1000') center/cover;
+        }
+
+        .compare-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .compare-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
             background: var(--bg-panel);
             border: 1px solid var(--card-border);
             border-radius: 8px;
-            padding: 2rem;
+            padding: 1.25rem;
         }
 
-        .workflow-grid {
+        .compare-item strong {
+            width: 34px;
+            height: 34px;
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .workflow-step {
-            background: var(--card-inner);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 1.1rem;
-        }
-
-        .workflow-step strong {
-            display: inline-flex;
-            width: 32px;
-            height: 32px;
-            align-items: center;
-            justify-content: center;
+            place-items: center;
             border-radius: 50%;
-            background: var(--accent-blue);
-            color: #08233d;
-            margin-bottom: 1rem;
+            background: var(--accent-amber);
+            color: #3a2500;
         }
 
-        .workflow-step h3 {
+        .compare-item h3 {
             font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
         }
 
-        .workflow-step p {
+        .compare-item p {
             color: var(--text-muted);
-            font-size: 0.82rem;
+            font-size: 0.86rem;
         }
 
         .cta-panel {
@@ -366,7 +358,7 @@
             gap: 2rem;
             align-items: center;
             padding: 2rem;
-            background: linear-gradient(160deg, rgba(127, 199, 255, 0.14), var(--bg-panel));
+            background: linear-gradient(160deg, rgba(244, 197, 106, 0.14), var(--bg-panel));
             border: 1px solid var(--card-border);
             border-radius: 8px;
         }
@@ -409,29 +401,34 @@
             --nav-border: rgba(0, 0, 0, 0.05);
         }
 
-        .light-mode .mount-hero {
+        .light-mode .advice-hero {
             background:
-                radial-gradient(circle at 72% 32%, rgba(11, 116, 209, 0.16), transparent 34%),
-                linear-gradient(135deg, #f7f9fc 0%, #edf6ff 52%, #f7f9fc 100%);
+                radial-gradient(circle at 18% 28%, rgba(180, 83, 9, 0.14), transparent 32%),
+                linear-gradient(145deg, #fffaf2, #fff7e8 52%, #f7f9fc);
         }
 
-        .light-mode .build-preview {
+        .light-mode .decision-panel::before {
+            background: rgba(255, 255, 255, 0.66);
+            color: rgba(180, 83, 9, 0.82);
+        }
+
+        .light-mode .decision-panel {
             background:
                 linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.84)),
-                url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=85&w=1000') center/cover;
+                url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=85&w=1000') center/cover;
         }
 
-        .light-mode .preview-content {
+        .light-mode .panel-content {
             background: rgba(255, 255, 255, 0.88);
         }
 
         .light-mode .lead-form {
             background: rgba(255, 255, 255, 0.92);
-            border-color: rgba(11, 116, 209, 0.22);
+            border-color: rgba(180, 83, 9, 0.22);
         }
 
         .light-mode .form-group label {
-            color: #25415f;
+            color: #67410f;
         }
 
         .light-mode input,
@@ -448,12 +445,15 @@
             color: #166534;
         }
 
-        .light-mode .build-card img {
+        .light-mode .compare-image {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.32)),
+                url('https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&q=85&w=1000') center/cover;
             filter: saturate(1.06) contrast(1.02) brightness(1.03);
         }
 
         .light-mode .cta-panel {
-            background: linear-gradient(160deg, rgba(11, 116, 209, 0.1), #ffffff);
+            background: linear-gradient(160deg, rgba(180, 83, 9, 0.1), #ffffff);
         }
 
         .light-mode .nav-links a.active {
@@ -462,52 +462,29 @@
         }
 
         @media (max-width: 980px) {
-            .mount-hero,
+            .advice-hero,
+            .compare-section,
             .cta-panel {
                 grid-template-columns: 1fr;
             }
 
-            .build-preview {
-                min-height: 320px;
-            }
-
-            .lead-form {
-                align-self: auto;
-            }
-
-            .build-grid,
-            .workflow-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .decision-panel { min-height: 320px; }
+            .advice-grid { grid-template-columns: 1fr 1fr; }
+            .lead-form { align-self: auto; }
         }
 
         @media (max-width: 720px) {
-            .mount-hero {
+            .advice-hero {
                 padding: 8rem 1.25rem 3rem;
                 gap: 2rem;
             }
 
-            .build-grid,
-            .workflow-grid,
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .section-heading {
-                display: block;
-            }
-
-            .section-heading p {
-                margin-top: 1rem;
-            }
-
-            .container {
-                padding: 3rem 1.25rem;
-            }
-
-            footer {
-                flex-direction: column;
-            }
+            .advice-grid,
+            .form-row { grid-template-columns: 1fr; }
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 1rem; }
+            .container { padding: 3rem 1.25rem; }
+            footer { flex-direction: column; }
         }
     </style>
 </head>
@@ -515,20 +492,20 @@
 
     <%- include('navbar') %>
 
-    <header class="mount-hero">
+    <header class="advice-hero">
         <div class="hero-copy">
-            <div class="eyebrow">Montaje profesional</div>
-            <h1>Tu equipo ideal, montado con <span>criterio técnico.</span></h1>
-            <p>Diseñamos configuraciones equilibradas para gaming, edición, IA, oficina o estaciones profesionales. Sin piezas al azar: cada componente tiene una razón.</p>
+            <div class="eyebrow">Asesoría hardware</div>
+            <h1>Compra componentes con menos dudas y más <span>criterio.</span></h1>
+            <p>Te ayudamos a decidir si merece la pena actualizar, reparar, montar desde cero o esperar. La idea es gastar donde se nota y evitar piezas incompatibles.</p>
             <div class="hero-actions">
-                <a class="btn-service btn-primary-service" href="#solicitud">Rellenar solicitud</a>
+                <a class="btn-service btn-primary-service" href="#solicitud">Pedir asesoría</a>
                 <a class="btn-service" href="/hardware">Volver a hardware</a>
             </div>
         </div>
-        <form class="lead-form" id="solicitud" action="/solicitar-montaje" method="POST">
-            <h2>Recibe una configuración inicial</h2>
-            <p>Déjanos lo básico y te orientamos con una propuesta de montaje.</p>
-            <% if (success) { %>
+        <form class="lead-form" id="solicitud" action="/solicitar-asesoria-hardware" method="POST">
+            <h2>Resuelve tu duda antes de comprar</h2>
+            <p>Cuéntanos qué tienes en mente y te ayudamos a elegir el camino correcto.</p>
+            <% if (typeof success !== 'undefined' && success) { %>
                 <div class="success-banner">Solicitud enviada. Te responderemos lo antes posible.</div>
             <% } %>
             <div class="form-row">
@@ -543,105 +520,94 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label for="presupuesto">Presupuesto</label>
-                    <input type="text" id="presupuesto" name="presupuesto" placeholder="Ej: 1200€">
-                </div>
-                <div class="form-group">
-                    <label for="uso">Uso principal</label>
-                    <select id="uso" name="uso">
-                        <option>Gaming / Streaming</option>
-                        <option>Edición / 3D / IA</option>
-                        <option>Oficina / Empresa</option>
+                    <label for="objetivo">Objetivo</label>
+                    <select id="objetivo" name="objetivo">
+                        <option>Comprar piezas</option>
+                        <option>Actualizar mi equipo</option>
+                        <option>Comparar presupuestos</option>
                         <option>No estoy seguro</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="presupuesto">Presupuesto</label>
+                    <input type="text" id="presupuesto" name="presupuesto" placeholder="Ej: 800€">
+                </div>
             </div>
             <div class="form-group">
-                <label for="detalles">Qué necesitas</label>
-                <textarea id="detalles" name="detalles" rows="3" placeholder="Piezas que tienes, uso, estética o dudas..."></textarea>
+                <label for="detalles">Duda principal</label>
+                <textarea id="detalles" name="detalles" rows="3" placeholder="Piezas que estás mirando, equipo actual o uso que le darás..."></textarea>
             </div>
-            <button class="form-submit" type="submit">Solicitar montaje</button>
+            <button class="form-submit" type="submit">Pedir asesoría</button>
         </form>
     </header>
 
     <main class="container">
-        <section id="tipos">
+        <section id="decisiones">
             <div class="section-heading">
-                <h2>Configuraciones habituales</h2>
-                <p>Estas son las bases más comunes. A partir de ahí ajustamos presupuesto, marcas, estética y necesidades reales.</p>
+                <h2>Qué resolvemos</h2>
+                <p>La asesoría convierte una lista de dudas en una decisión clara, con prioridades y opciones realistas.</p>
             </div>
 
-            <div class="build-grid">
-                <article class="build-card">
-                    <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=80&w=900" alt="Componentes de PC gaming">
-                    <div class="build-card-body">
-                        <span class="build-tag">Gaming</span>
-                        <h3>PC gaming y streaming</h3>
-                        <p>FPS estables, buena refrigeración, GPU equilibrada y margen para futuras ampliaciones.</p>
-                    </div>
+            <div class="advice-grid">
+                <article class="advice-card">
+                    <span class="advice-tag">Comprar</span>
+                    <h3>Elegir componentes compatibles</h3>
+                    <p>Revisamos CPU, GPU, placa, RAM, caja, fuente, refrigeración y almacenamiento antes de comprar.</p>
                 </article>
 
-                <article class="build-card">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=900" alt="Placa base y componentes electrónicos">
-                    <div class="build-card-body">
-                        <span class="build-tag green">Trabajo</span>
-                        <h3>Edición, 3D e IA</h3>
-                        <p>CPU, memoria, GPU y almacenamiento pensados para cargas pesadas y trabajo sostenido.</p>
-                    </div>
+                <article class="advice-card">
+                    <span class="advice-tag blue">Actualizar</span>
+                    <h3>Mejorar sin cambiarlo todo</h3>
+                    <p>Detectamos qué pieza limita el equipo y qué mejora tendrá impacto real en rendimiento.</p>
                 </article>
 
-                <article class="build-card">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=900" alt="Portátil y espacio de trabajo profesional">
-                    <div class="build-card-body">
-                        <span class="build-tag amber">Empresa</span>
-                        <h3>Equipos para oficina</h3>
-                        <p>Silenciosos, rápidos y fiables para administración, ventas, atención al cliente y gestión diaria.</p>
-                    </div>
+                <article class="advice-card">
+                    <span class="advice-tag green">Ahorrar</span>
+                    <h3>Evitar gasto innecesario</h3>
+                    <p>Comparamos alternativas y separamos lo imprescindible de lo que solo encarece la compra.</p>
                 </article>
             </div>
         </section>
 
-        <section class="workflow">
-            <div class="section-heading">
-                <h2>Proceso de montaje</h2>
-                <p>Un flujo claro para que sepas qué se decide, qué se compra y cómo se valida el equipo final.</p>
-            </div>
-            <div class="workflow-grid">
-                <article class="workflow-step">
+        <section class="compare-section">
+            <div class="compare-image" aria-label="Comparativa de componentes de hardware"></div>
+            <div class="compare-list">
+                <article class="compare-item">
                     <strong>1</strong>
-                    <h3>Uso y presupuesto</h3>
-                    <p>Definimos para qué se usará el equipo y dónde conviene invertir.</p>
+                    <div>
+                        <h3>Presupuesto con sentido</h3>
+                        <p>Distribuimos el dinero según el uso: no todas las tareas necesitan la misma GPU, RAM o CPU.</p>
+                    </div>
                 </article>
-                <article class="workflow-step">
+                <article class="compare-item">
                     <strong>2</strong>
-                    <h3>Componentes</h3>
-                    <p>Elegimos piezas compatibles y equilibradas, evitando cuellos de botella.</p>
+                    <div>
+                        <h3>Compatibilidad revisada</h3>
+                        <p>Comprobamos socket, tamaño de caja, consumo, BIOS, conectores y refrigeración.</p>
+                    </div>
                 </article>
-                <article class="workflow-step">
+                <article class="compare-item">
                     <strong>3</strong>
-                    <h3>Montaje limpio</h3>
-                    <p>Cableado ordenado, flujo de aire cuidado y BIOS configurada.</p>
-                </article>
-                <article class="workflow-step">
-                    <strong>4</strong>
-                    <h3>Pruebas</h3>
-                    <p>Comprobamos temperaturas, estabilidad y rendimiento antes de entregar.</p>
+                    <div>
+                        <h3>Plan de evolución</h3>
+                        <p>Si no conviene comprar todo ahora, dejamos una ruta por fases para ampliar más adelante.</p>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section class="cta-panel">
             <div>
-                <h2>¿Tienes ya piezas o partes desde cero?</h2>
-                <p>Podemos revisar una lista de componentes, proponer una configuración completa o montar un equipo con piezas que ya tengas.</p>
+                <h2>¿Ya tienes una lista de piezas?</h2>
+                <p>Puedes usar la asesoría como paso previo al montaje. Revisamos la configuración y, si encaja, pasas al montaje con una base sólida.</p>
             </div>
-            <a class="btn-service btn-primary-service" href="/hardware">Elegir servicio</a>
+            <a class="btn-service btn-primary-service" href="/montaje">Ver montaje</a>
         </section>
     </main>
 
     <footer>
         <div class="logo">TECHRM</div>
-        <div>© 2026 TECHRM. Montaje claro, probado y preparado para crecer.</div>
+        <div>© 2026 TECHRM. Asesoría clara antes de comprar hardware.</div>
     </footer>
 
 </body>

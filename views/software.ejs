@@ -263,6 +263,8 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
             min-height: 100%;
         }
 
@@ -291,6 +293,12 @@
         .service-card p {
             color: var(--text-muted);
             font-size: 0.86rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-link {
+            width: 100%;
+            margin-top: auto;
         }
 
         .use-cases {
@@ -683,21 +691,25 @@
                     <div class="service-icon">CRM</div>
                     <h3>Gestión de negocio</h3>
                     <p>Clientes, ventas, stock, citas o tareas en un panel centralizado y fácil de usar.</p>
+                    <a class="btn-service btn-primary-service service-link" href="/crm">Ver CRM</a>
                 </article>
                 <article class="service-card">
                     <div class="service-icon violet">POS</div>
                     <h3>Sistemas de venta</h3>
                     <p>Caja, catálogo e inventario conectados para reducir errores y ahorrar tiempo.</p>
+                    <a class="btn-service service-link" href="/sistemas-venta">Ver ventas</a>
                 </article>
                 <article class="service-card">
                     <div class="service-icon green">WEB</div>
                     <h3>Páginas web</h3>
                     <p>Presencia online rápida, clara y adaptada a móvil, con estructura pensada para convertir.</p>
+                    <a class="btn-service service-link" href="/paginas-web">Ver webs</a>
                 </article>
                 <article class="service-card">
                     <div class="service-icon rose">API</div>
                     <h3>Automatizaciones</h3>
                     <p>Conectamos herramientas, formularios y datos para eliminar tareas repetitivas.</p>
+                    <a class="btn-service service-link" href="/automatizaciones">Ver automatizaciones</a>
                 </article>
             </div>
         </section>

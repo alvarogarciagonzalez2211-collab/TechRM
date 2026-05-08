@@ -418,6 +418,10 @@ footer {
     --nav-border: rgba(0, 0, 0, 0.05);
 }
 
+.light-mode .hero p {
+    color: #000000;
+}
+
 * {
     margin: 0;
     padding: 0;

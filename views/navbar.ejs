@@ -1,28 +1,33 @@
 <style>
-    /* Navbar Styles */
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem 4rem;
+        gap: 1.25rem;
+        padding: 1.25rem clamp(1rem, 4vw, 4rem);
         border-bottom: 1px solid var(--nav-border);
         background-color: var(--nav-bg);
         position: fixed;
         width: 100%;
         top: 0;
         z-index: 100;
+        backdrop-filter: blur(14px);
     }
 
     .logo {
-        font-size: 1.5rem;
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
         font-weight: 800;
-        letter-spacing: -0.5px;
+        letter-spacing: 0;
         color: var(--text-main);
+        flex: 0 0 auto;
     }
 
     .nav-links {
         display: flex;
-        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(0.75rem, 2.5vw, 2rem);
+        min-width: 0;
     }
 
     .nav-links a {
@@ -30,9 +35,11 @@
         font-weight: 600;
         text-transform: uppercase;
         color: var(--text-muted);
-        letter-spacing: 1px;
+        letter-spacing: 0;
         text-decoration: none;
         transition: color 0.3s;
+        margin: 0;
+        white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -49,60 +56,381 @@
         border-bottom-color: #007bff;
     }
 
-    .btn-toggle {
-        background: rgba(255,255,255,0.1);
-        color: var(--text-main);
-        padding: 0.6rem 1rem;
-        border-radius: 20px;
-        font-size: 1rem;
-        border: 1px solid rgba(255,255,255,0.3);
-        cursor: pointer;
-        transition: all 0.3s;
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex: 0 0 auto;
     }
 
-    .btn-toggle:hover {
+    .btn-toggle,
+    .nav-menu-toggle {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.3);
+        background: rgba(255,255,255,0.1);
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.3s;
+        flex: 0 0 auto;
+    }
+
+    .btn-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-toggle:hover,
+    .nav-menu-toggle:hover {
         background: rgba(255,255,255,0.2);
         border-color: rgba(255,255,255,0.4);
     }
 
-    .light-mode .btn-toggle {
+    .light-mode .btn-toggle,
+    .light-mode .nav-menu-toggle {
         border-color: rgba(0,0,0,0.3);
         background: rgba(0,0,0,0.1);
     }
 
-    .light-mode .btn-toggle:hover {
+    .light-mode .btn-toggle:hover,
+    .light-mode .nav-menu-toggle:hover {
         background: rgba(0,0,0,0.2);
         border-color: rgba(0,0,0,0.4);
+    }
+
+    .theme-icon {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        border: 2px solid currentColor;
+        box-shadow: 6px -4px 0 -2px var(--nav-bg);
+    }
+
+    .light-mode .theme-icon {
+        width: 18px;
+        height: 18px;
+        border: 2px solid currentColor;
+        box-shadow: none;
+        background:
+            linear-gradient(currentColor, currentColor) center/2px 100% no-repeat,
+            linear-gradient(90deg, currentColor, currentColor) center/100% 2px no-repeat;
+    }
+
+    .nav-menu-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .nav-menu-toggle span {
+        width: 18px;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
+        transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .nav-menu-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-menu-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width: 900px) {
+        nav {
+            padding: 0.85rem 1rem;
+        }
+
+        .nav-menu-toggle {
+            display: inline-flex;
+        }
+
+        .nav-links {
+            position: absolute;
+            top: calc(100% + 1px);
+            left: 0;
+            right: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            padding: 0.5rem 1rem 1rem;
+            border-bottom: 1px solid var(--nav-border);
+            background: var(--nav-bg);
+            transform: translateY(-12px);
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+        }
+
+        nav.nav-open .nav-links {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            min-height: 46px;
+            border-bottom: 1px solid var(--nav-border);
+            font-size: 0.82rem;
+        }
+
+        .nav-links a.active {
+            padding-bottom: 0;
+            border-bottom: 1px solid var(--nav-border);
+            color: var(--text-main);
+        }
+    }
+
+    @media (max-width: 420px) {
+        .logo {
+            font-size: 1.1rem;
+        }
+
+        .btn-toggle,
+        .nav-menu-toggle {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    @media (max-width: 1100px) {
+        .grid-2,
+        .why-techrm,
+        .quote-section,
+        .contact-section,
+        .use-cases,
+        .compare-section,
+        .split-section,
+        .hardware-hero,
+        .software-hero,
+        .software-detail-hero,
+        .mount-hero,
+        .repair-hero,
+        .advice-hero,
+        .cta-panel,
+        .about-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .service-grid,
+        .build-grid,
+        .repair-grid,
+        .advice-grid,
+        .feature-grid,
+        .workflow-grid,
+        .timeline-grid,
+        .features-grid,
+        .team-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+    }
+
+    @media (max-width: 760px) {
+        body {
+            overflow-x: hidden;
+        }
+
+        section,
+        .section,
+        .services,
+        .trust-section,
+        .bottom-section,
+        .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        .hero,
+        .hardware-hero,
+        .software-hero,
+        .software-detail-hero,
+        .mount-hero,
+        .repair-hero,
+        .advice-hero {
+            width: 100% !important;
+            min-height: auto !important;
+            height: auto !important;
+            padding: 6.5rem 1rem 2.5rem !important;
+            gap: 1.5rem !important;
+        }
+
+        .hero {
+            flex-direction: column !important;
+        }
+
+        .hero-half {
+            width: 100% !important;
+            min-height: 48vh !important;
+            padding: 5rem 1rem 3rem !important;
+        }
+
+        .hero h1,
+        .hardware-hero h1,
+        .software-hero h1,
+        .software-detail-hero h1,
+        .mount-hero h1,
+        .repair-hero h1,
+        .advice-hero h1 {
+            font-size: clamp(2.1rem, 12vw, 3.2rem) !important;
+            line-height: 1.02 !important;
+        }
+
+        .hero p,
+        .hero-copy p,
+        .repair-hero p {
+            max-width: 100% !important;
+            font-size: 0.98rem !important;
+        }
+
+        .hero-actions,
+        .footer-links,
+        .footer-social {
+            width: 100%;
+        }
+
+        .hero-actions .btn-service,
+        .btn-service,
+        .hero-btn,
+        .btn-outline-sm,
+        .btn-primary {
+            width: 100%;
+            min-width: 0;
+            text-align: center;
+        }
+
+        .service-grid,
+        .build-grid,
+        .repair-grid,
+        .advice-grid,
+        .feature-grid,
+        .workflow-grid,
+        .timeline-grid,
+        .features-grid,
+        .team-grid,
+        .stats-grid,
+        .inner-grid,
+        .form-grid,
+        .form-row,
+        .mission-vision {
+            grid-template-columns: 1fr !important;
+        }
+
+        .card,
+        .feature-card,
+        .team-card,
+        .workflow,
+        .timeline,
+        .cta-panel,
+        .quote-copy,
+        .quote-form,
+        .contact-copy,
+        .contact-form,
+        .lead-form {
+            padding: 1.25rem !important;
+        }
+
+        .section-heading {
+            display: block !important;
+        }
+
+        .section-heading p {
+            margin-top: 1rem;
+        }
+
+        .banner-tv,
+        footer {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            text-align: center !important;
+            gap: 1rem !important;
+        }
+
+        .footer-links,
+        .footer-social {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .about-image,
+        .use-case-image,
+        .compare-image,
+        .detail-image,
+        .hero-panel,
+        .decision-panel,
+        .build-preview {
+            min-height: 260px !important;
+        }
     }
 </style>
 
 <nav>
     <div class="logo">TechRM</div>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
         <a href="/" class="<%= currentPage === 'index' ? 'active' : '' %>">SERVICIOS</a>
         <a href="/hardware" class="<%= currentPage === 'hardware' ? 'active' : '' %>">HARDWARE</a>
         <a href="/software" class="<%= currentPage === 'software' ? 'active' : '' %>">SOFTWARE</a>
         <a href="/nosotros" class="<%= currentPage === 'nosotros' ? 'active' : '' %>">NOSOTROS</a>
     </div>
-    <button class="btn-toggle" id="theme-toggle" title="Cambiar tema">🌙</button>
+    <div class="nav-actions">
+        <button class="btn-toggle" id="theme-toggle" title="Cambiar tema" aria-label="Cambiar tema">
+            <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+        <button class="nav-menu-toggle" id="nav-menu-toggle" type="button" aria-label="Abrir menu" aria-controls="nav-links" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
 </nav>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.querySelector('nav');
+    const menuToggle = document.getElementById('nav-menu-toggle');
     const themeToggle = document.getElementById('theme-toggle');
+
+    if (nav && menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            const isOpen = nav.classList.toggle('nav-open');
+            this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            this.setAttribute('aria-label', isOpen ? 'Cerrar menu' : 'Abrir menu');
+        });
+
+        nav.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                nav.classList.remove('nav-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            });
+        });
+    }
+
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
             document.body.classList.toggle('light-mode');
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-            this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
         });
     }
-    
-    // Aplicar tema guardado
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-mode');
-        if (themeToggle) themeToggle.textContent = '☀️';
     }
 });
 </script>
